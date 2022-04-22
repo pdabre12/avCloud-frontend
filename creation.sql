@@ -43,8 +43,8 @@ user_phone varchar(10) not null
 
 SET SQL_SAFE_UPDATES = 0;
 delete from users;
-INSERT INTO users VALUES('','user1', sha2('userpw1', 256), 'user1@gmail.com', '6668889999');
-INSERT INTO users VALUES('','user2', sha2('text', 256), 'user2@gmail.com', '6667779999');
+INSERT INTO users VALUES('','user1', 'juehqhwrwFbsM/O4yA7oag==', 'user1@gmail.com', '6668889999');
+INSERT INTO users VALUES('','user2', '93Gow7kd/lywdRya3QH3IepTIgkEXLfCKSo1ob/Kr2M=', 'user2@gmail.com', '6667779999');
 -- INSERT INTO users(user_name, user_pw, user_email, user_phone) VALUES ('user3', 'userpw3', 'user3@gmail.com', '6667772222');
 SELECT * FROM users;
 

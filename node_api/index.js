@@ -1,18 +1,20 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const queriesUsersRouter = require("./routes/queries");
+const queriesRouter = require("./routes/queries");
 app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
+
 app.get("/test", (req, res) => {
   res.json({ message: "API is alive" });
+  console.log("**** GET **** Health Check ****");
 });
 
-app.use("/users", queriesUsersRouter);
+app.use("/", queriesRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

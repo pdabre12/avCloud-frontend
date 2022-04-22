@@ -3,7 +3,8 @@ const router = express.Router();
 const queries = require('../services/queries');
 
 /* GET users. */
-router.get('/', async function(req, res, next) {
+router.get('/users', async function(req, res, next) {
+  console.log("**** GET **** All Users ****");
   try {
     res.json(await queries.getMultipleUsers(req.query.page));
   } catch (err) {
@@ -12,8 +13,9 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-/* POST user */
-router.post('/', async function(req, res, next) {
+/* POST new user */
+router.post('/users', async function(req, res, next) {
+  console.log("**** POST **** New User ****");
   try {
     res.json(await queries.postUser(req.body));
   } catch (err) {
@@ -22,8 +24,9 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-/* login user */
-router.post('/login', async function(req, res, next) {
+/* POST login credentials */
+router.post('/users/login', async function(req, res, next) {
+  console.log("**** POST **** User Login ****");
   try {
     res.json(await queries.loginUser(req.body));
   } catch (err) {
@@ -33,7 +36,8 @@ router.post('/login', async function(req, res, next) {
 });
 
 /* DELETE user */
-router.delete('/:user_name', async function(req, res, next) {
+router.delete('/users/:user_name', async function(req, res, next) {
+  console.log("**** DELETE **** Delete User ****");
   try {
     res.json(await queries.deleteUser(req.params.user_name));
   } catch (err) {
