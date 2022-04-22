@@ -22,6 +22,16 @@ router.post('/', async function(req, res, next) {
   }
 });
 
+/* login user */
+router.post('/login', async function(req, res, next) {
+  try {
+    res.json(await queries.loginUser(req.body));
+  } catch (err) {
+    console.error(`Error while logging in. `, err.message);
+    next(err);
+  }
+});
+
 /* DELETE user */
 router.delete('/:user_name', async function(req, res, next) {
   try {

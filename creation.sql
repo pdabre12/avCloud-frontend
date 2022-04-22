@@ -15,7 +15,7 @@ car_loc_y float(4) not null
 drop TABLE if exists admins;
 CREATE TABLE admins (
 admin_id varchar(9) not null PRIMARY KEY,
-admin_pw varchar(40) not null
+admin_pw varchar(45) not null
 -- foreign key (a_car_id) references cars(car_id) on update cascade
 );
 
@@ -36,16 +36,16 @@ drop TABLE if exists users;
 CREATE TABLE users (
 user_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 user_name varchar(20) not null unique,
-user_pw varchar(40) not null,
+user_pw varchar(45) not null,
 user_email varchar(30) not null,
 user_phone varchar(10) not null
 );
 
 SET SQL_SAFE_UPDATES = 0;
 delete from users;
-INSERT INTO users VALUES('','user1', sha1('userpw1'), 'user1@gmail.com', '6668889999');
-INSERT INTO users VALUES('','user2', sha1('userpw2'), 'user2@gmail.com', '6667779999');
-INSERT INTO users(user_name, user_pw, user_email, user_phone) VALUES ('user3', 'userpw3', 'user3@gmail.com', '6667772222');
+INSERT INTO users VALUES('','user1', sha2('userpw1', 256), 'user1@gmail.com', '6668889999');
+INSERT INTO users VALUES('','user2', sha2('text', 256), 'user2@gmail.com', '6667779999');
+-- INSERT INTO users(user_name, user_pw, user_email, user_phone) VALUES ('user3', 'userpw3', 'user3@gmail.com', '6667772222');
 SELECT * FROM users;
 
 

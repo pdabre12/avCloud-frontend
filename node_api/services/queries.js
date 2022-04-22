@@ -2,28 +2,22 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 const crypto = require('crypto');
-const algorithm = 'aes-256-ctr';
-const secret_key = Buffer.from('FoCKvdLslUuB4y3EZlKate7XGottHski1LmyqJHvUhs=', 'base64');
-const iv_len = 16;
+const ENC= 'bf3c199c2470cb477d907b1e0917c17b';
+const IV = "5183666c72eec9e4";
+const ALGO = "aes-256-cbc"
 
-// ref: https://stackoverflow.com/questions/60369148/how-do-i-replace-deprecated-crypto-createcipher-in-node-js
-function encrypt(text) {
-    let iv = crypto.randomBytes(iv_len);
-    let cipher = crypto.createCipheriv(algorithm, Buffer.from(secret_key, 'hex'), iv);
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return iv.toString('hex') + ':' + encrypted.toString('hex');
-}
+function encrypt (text) {
+  let cipher = crypto.createCipheriv(ALGO, ENC, IV);
+  let encrypted = cipher.update(text, 'utf8', 'base64');
+  encrypted += cipher.final('base64');
+  return encrypted;
+ };
 
-function decrypt(text) {
-    let textParts = text.split(':');
-    let iv = Buffer.from(textParts.shift(), 'hex');
-    let encryptedText = Buffer.from(textParts.join(':'), 'hex');
-    let decipher = crypto.createDecipheriv(algorithm, Buffer.from(secret_key, 'hex'), iv);
-    let decrypted = decipher.update(encryptedText);
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
-}
+ function decrypt (text) {
+   let decipher = crypto.createDecipheriv(ALGO, ENC, IV);
+   let decrypted = decipher.update(text, 'base64', 'utf8');
+   return (decrypted + decipher.final('utf8'));
+};
 
 
 async function getMultipleUsers(page = 1){
@@ -51,11 +45,33 @@ async function postUser(user){
     ('${user.user_name}', '${pw_sha}', '${user.user_email}', '${user.user_phone}')`
   );
 
-  let message = 'Error in creating a user';
+  let message = 'Error in creating user.';
 
   if (result.affectedRows) {
     message = 'New user created successfully';
   }
+
+  return {message};
+}
+
+
+async function loginUser(user){
+  const result = await db.query(
+    `SELECT user_pw FROM users WHERE user_name = '${user.user_name}'`
+  );
+  console.log(result);
+
+// ref: https://stackoverflow.com/questions/48782788/convert-nodejs-mysql-result-to-accessible-json-object
+  var jsonObj = Object.assign({}, result[0]);
+  console.log(jsonObj.user_pw);
+
+  var pw_sha = decrypt(jsonObj.user_pw);
+  console.log(pw_sha);
+
+  if (pw_sha === user.user_pw) 
+    message = 'Log in successfully!';
+  else 
+    message = 'Error in logging in.';
 
   return {message};
 }
@@ -78,5 +94,6 @@ async function deleteUser(user_name){
   module.exports = {
   getMultipleUsers,
   postUser,
+  loginUser,
   deleteUser
 }
