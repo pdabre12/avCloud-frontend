@@ -3,12 +3,13 @@ const router = express.Router();
 const queries = require('../services/queries');
 
 /* GET users. */
-router.get('/users', async function(req, res, next) {
-  console.log("**** GET **** All Users ****");
+router.get('/:table_name', async function(req, res, next) {
+  var table = req.params.table_name;
+  console.log("**** GET **** All " + table + " info ****");
   try {
-    res.json(await queries.getMultipleUsers(req.query.page));
+    res.json(await queries.getMultiple(table));
   } catch (err) {
-    console.error(`Error while getting users info. `, err.message);
+    console.error(`Error while fetching info. `, err.message);
     next(err);
   }
 });

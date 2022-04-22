@@ -2,17 +2,14 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
-async function getMultipleUsers(page = 1){
-  const offset = helper.getOffset(page, config.listPerPage);
+async function getMultiple(table_name){
   const rows = await db.query(
-    `SELECT * FROM users LIMIT ${offset},${config.listPerPage}`
+    `SELECT * FROM ${table_name}`
   );
   const data = helper.emptyOrRows(rows);
-  const meta = {page};
 
   return {
-    data,
-    meta
+    data
   }
 }
 
@@ -74,7 +71,7 @@ async function deleteUser(user_name){
 }
 
   module.exports = {
-  getMultipleUsers,
+  getMultiple,
   postUser,
   loginUser,
   deleteUser
