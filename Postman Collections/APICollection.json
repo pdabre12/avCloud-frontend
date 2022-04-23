@@ -252,7 +252,16 @@
       "request": {
         "method": "POST",
         "header": [],
-        "url": "http://localhost:3000/bookings/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"start_loc_x\": 2312.3,\n    \"start_loc_y\": 56.2,\n    \"destination_loc_x\": 2000,\n    \"destination_loc_y\": 70,\n    \"user_name\": \"user1\",\n    \"b_car_id\": 6\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/bookings",
         "description": "add a booking for user"
       },
       "response": []
