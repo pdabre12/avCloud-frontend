@@ -242,6 +242,20 @@
         "url": "http://localhost:3000/cars/4"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/bookings/{user_name}",
+      "id": "af02821d-70df-4bcd-9bdb-3cd6292836ba",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:3000/bookings/",
+        "description": "add a booking for user"
+      },
+      "response": []
     }
   ]
 }
