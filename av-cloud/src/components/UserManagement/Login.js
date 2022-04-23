@@ -142,7 +142,6 @@ export default function LoginForm() {
             </Col>
           </Row>
 
-          <logout setUser={setuser}></logout>
         </React.Fragment>
       )}
     </>

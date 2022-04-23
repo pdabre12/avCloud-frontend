@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Button, Form } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 
 function NavBar() {
   const history = useHistory();
-  const [userDetails, setUserDetails] = useState({'username':'Pratik'});
+  const [userDetails, setUserDetails] = useState(null);
 
 //   useEffect(() => {
 // //     setInterval(() => {
@@ -22,9 +22,9 @@ function NavBar() {
 
   const logoutClicked = (e) => {
     e.preventDefault();
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     setUserDetails(null);
-    history.replace("/");
+    history.push("/");
   };
   const loginClicked = (e) => {
     e.preventDefault();

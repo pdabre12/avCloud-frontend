@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from "react";
 import { Button, Card, Form, Row, Col } from "react-bootstrap";
 
-import { Link, useHistory ,Redirect} from "react-router-dom";
+import { Link ,Redirect , useHistory} from "react-router-dom";
+
 import axios from "axios";
-import { register } from "../../features/autheticationfeature";
 
 export default function RegisterUser() {
   const history = useHistory();
@@ -12,9 +12,9 @@ export default function RegisterUser() {
 
   const [regUserdata, setRegUserdata] = useState({
     user_name: "",
-    email: "",
-    password: "",
-    contact: "",
+    user_email: "",
+    user_pw: "",
+    user_phone: "",
   });
 
   useEffect(() => {
@@ -23,8 +23,7 @@ export default function RegisterUser() {
 
       if (loggedInUser) {
         setUserDetails(JSON.parse(loggedInUser));
-        window.alert("Already logged in");
-        history.push("/user/profile");
+        history.push("/");
         //   navigate(-1);
       }
     };
@@ -45,7 +44,7 @@ export default function RegisterUser() {
     if (response.status == 200) {
     localStorage.setItem("user", JSON.stringify(response.data));
       setUserProfile(response.data);
-      history.go(-1);
+      history.go('/');
       console.log(response.data);
 
       // navigate("/login");
@@ -98,8 +97,8 @@ export default function RegisterUser() {
                 <Form.Control
                   type="email"
                   placeholder="email"
-                  id="email"
-                  name="email"
+                  id="user_email"
+                  name="user_email"
                   required
                 />
                 <label htmlFor="Email" style={{ marginLeft: 10 }}>
@@ -112,8 +111,8 @@ export default function RegisterUser() {
                 <Form.Control
                   type="password"
                   placeholder="Password"
-                  id="Password"
-                  name="password"
+                  id="user_pw"
+                  name="user_pw"
                   required
                 />
                 <label htmlFor="Password" style={{ marginLeft: 10 }}>
@@ -126,8 +125,8 @@ export default function RegisterUser() {
                 <Form.Control
                   type="text"
                   placeholder="66944554687"
-                  id="contact"
-                  name="contact"
+                  id="user_phone"
+                  name="user_phone"
                   required
                 />
                 <label htmlFor="contact" style={{ marginLeft: 10 }}>

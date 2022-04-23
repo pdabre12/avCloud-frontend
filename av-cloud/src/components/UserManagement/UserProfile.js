@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UseForm from "./UseForm";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Navbar, Card, Col, Row, Spinner } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 
@@ -57,7 +57,7 @@ const UserProfile = (props) => {
             style={{
               display: "flex",
               width: "100vw",
-              margin: "0px",
+              marginTop: "20px",
               paddingTop: "5px",
               backgroundColor: "#f1f1f1",
             }}
@@ -110,7 +110,7 @@ const UserProfile = (props) => {
                   <>
                     <div>
                       {console.log({ userBookings })}
-                      {userBookings.map((item, index) => {
+                      {userBookings?.map((item, index) => {
                         const isActive = item?.status !== "ACTIVE";
                         return (
                           <Card>
