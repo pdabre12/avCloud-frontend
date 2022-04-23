@@ -9,6 +9,14 @@ app.use(
   })
 );
 
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+  next();
+});
+
+
 app.get("/test", (req, res) => {
   res.json({ message: "API is alive" });
   console.log("**** GET **** Health Check ****");

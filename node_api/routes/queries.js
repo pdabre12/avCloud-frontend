@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const queries = require('../services/queries');
 
-/* GET users. */
+/* GET a list of entries in {table}. */
 router.get('/:table_name', async function(req, res, next) {
   var table = req.params.table_name;
   console.log("**** GET **** All " + table + " info ****");
@@ -47,5 +47,27 @@ router.delete('/users/:user_name', async function(req, res, next) {
   }
 });
 
+/* GET one users. */
+router.get('/users/:user_name', async function(req, res, next) {
+  var user = req.params.user_name;
+  console.log("**** GET **** One user info ****");
+  try {
+    res.json(await queries.getOneUser(user));
+  } catch (err) {
+    console.error(`Error getting information about this user. `, err.message);
+    next(err);
+  }
+});
 
+
+/* PUT update user info */
+router.put('/users/:user_name', async function(req, res, next) {
+  console.log("**** PUT **** Update User info ****");
+  try {
+    res.json(await queries.putUser(req.body, req.params.user_name));
+  } catch (err) {
+    console.error(`Error while updating user. `, err.message);
+    next(err);
+  }
+});
 module.exports = router;

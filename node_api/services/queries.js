@@ -70,9 +70,46 @@ async function deleteUser(user_name){
   return {message};
 }
 
+async function getOneUser(user_name){
+  const row = await db.query(
+    `SELECT * FROM users WHERE user_name='${user_name}'`
+  );
+
+  const data = helper.emptyOrRows(row);
+
+  return {
+    data
+  }
+}
+
+async function putUser(user, user_name){
+  var new_pw_sha = helper.encrypt(user.user_pw);
+  const query = 'UPDATE `users` SET user_pw = ?, user_email = ?, user_phone = ? WHERE user_name = ?';
+  const result = await db.query(query, [new_pw_sha, user.user_email, user.user_phone, user_name]);
+
+  // const result = await db.query(
+  //   `UPDATE users
+  //    SET user_pw = '${new_pw_sha}',
+  //        user_email = '${user_email}',
+  //        user_phone = '${user_phone}'
+  //     WHERE user_name='${user_name}'
+  //    `
+  // );
+
+  let message = 'Error in updating user. ';
+
+  if (result.affectedRows) {
+    message = 'User updated successfully!';
+  }
+
+  return {message};
+}
+
   module.exports = {
   getMultiple,
   postUser,
   loginUser,
-  deleteUser
+  deleteUser,
+  getOneUser,
+  putUser
 }
