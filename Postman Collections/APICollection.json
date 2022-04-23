@@ -206,6 +206,20 @@
         "description": "get info about a specific car"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/cars",
+      "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:3000/cars",
+        "description": "post a new car"
+      },
+      "response": []
     }
   ]
 }
