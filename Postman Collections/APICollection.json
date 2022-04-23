@@ -7,7 +7,7 @@
   "item": [
     {
       "name": "http://localhost:3000/test",
-      "_postman_id": "51d9c236-e7b4-4676-931a-410c021a8e6c",
+      "id": "51d9c236-e7b4-4676-931a-410c021a8e6c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -21,7 +21,7 @@
     },
     {
       "name": "http://localhost:3000/users",
-      "_postman_id": "503520bb-3533-44dd-b4d2-93a72e97d361",
+      "id": "503520bb-3533-44dd-b4d2-93a72e97d361",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -35,7 +35,7 @@
     },
     {
       "name": "http://localhost:3000/admins",
-      "_postman_id": "1eb94b60-dc74-40fc-af65-a5701b9bcaaf",
+      "id": "1eb94b60-dc74-40fc-af65-a5701b9bcaaf",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -49,7 +49,7 @@
     },
     {
       "name": "http://localhost:3000/cars",
-      "_postman_id": "8caa18bf-1f47-481b-985e-9398205faa2c",
+      "id": "8caa18bf-1f47-481b-985e-9398205faa2c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -63,7 +63,7 @@
     },
     {
       "name": "http://localhost:3000/bookings",
-      "_postman_id": "213b1967-85c1-4044-9cf9-aab0ac456203",
+      "id": "213b1967-85c1-4044-9cf9-aab0ac456203",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -77,7 +77,7 @@
     },
     {
       "name": "http://localhost:3000/orders",
-      "_postman_id": "497b34c9-fd97-480c-8661-a14898f66f01",
+      "id": "497b34c9-fd97-480c-8661-a14898f66f01",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -90,7 +90,7 @@
     },
     {
       "name": "http://localhost:3000/users",
-      "_postman_id": "29f6f9b7-d0fa-4e11-9ad5-d9eb207ad528",
+      "id": "29f6f9b7-d0fa-4e11-9ad5-d9eb207ad528",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -113,7 +113,7 @@
     },
     {
       "name": "http://localhost:3000/users/login",
-      "_postman_id": "6a684e57-eb0d-4346-929f-4e5b1d8c9743",
+      "id": "6a684e57-eb0d-4346-929f-4e5b1d8c9743",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -136,7 +136,7 @@
     },
     {
       "name": "http://localhost:3000/users/{user_name}",
-      "_postman_id": "fc31c5fa-d66b-4552-93fc-191a6ca29123",
+      "id": "fc31c5fa-d66b-4552-93fc-191a6ca29123",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -150,7 +150,7 @@
     },
     {
       "name": "http://localhost:3000/users/{user_name}",
-      "_postman_id": "be1b8b21-f413-4e21-a6af-f70d1397ef1e",
+      "id": "be1b8b21-f413-4e21-a6af-f70d1397ef1e",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -173,7 +173,7 @@
     },
     {
       "name": "http://localhost:3000/users/{user_name}",
-      "_postman_id": "32b430e1-cfe1-4b89-ba91-f368de28b1e3",
+      "id": "32b430e1-cfe1-4b89-ba91-f368de28b1e3",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -195,14 +195,14 @@
     },
     {
       "name": "http://localhost:3000/cars/{car_id}",
-      "_postman_id": "b860d931-1e09-4aad-aecb-17ac2c854295",
+      "id": "b860d931-1e09-4aad-aecb-17ac2c854295",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
       "request": {
-        "method": "GET",
+        "method": "POST",
         "header": [],
-        "url": "http://localhost:3000/cars/5",
+        "url": "http://localhost:3000/cars",
         "description": "get info about a specific car"
       },
       "response": []
