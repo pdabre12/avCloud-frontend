@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import { Button, Card, Form, Row, Col } from "react-bootstrap";
 
 import { Link, useHistory ,Redirect} from "react-router-dom";
-
+import axios from "axios";
 import { register } from "../../features/autheticationfeature";
 
 export default function RegisterUser() {
@@ -34,16 +34,19 @@ export default function RegisterUser() {
     // console.log(event.target.value);
     setRegUserdata({ ...regUserdata, [event.target.name]: event.target.value });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(regUserdata);
 
-    const res = register(regUserdata);
-    if (res.status == 200) {
-    localStorage.setItem("user", JSON.stringify(res.data));
-      setUserProfile(res.data);
+    axios.post("http://localhost:3000/users",regUserdata)
+    .then(response=>{  
+    console.log(response)
+    if (response.status == 200) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+      setUserProfile(response.data);
       history.go(-1);
-      console.log(res.data);
+      console.log(response.data);
 
       // navigate("/login");
       console.log("registration successful");
@@ -52,7 +55,8 @@ export default function RegisterUser() {
       console.log("registration unsuccessful");
       history.push("/register");
     }
-  };
+  })
+};
 
   // history.push("/login");
 
