@@ -1,23 +1,34 @@
 import './App.css';
-import LoginPage from './components/LoginPage/Login';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from './components/UserManagement/Login';
+import { BrowserRouter , Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Register from './components/RegisterPage/Register';
+import Register from './components/UserManagement/Register';
+import UpdateUserInfo from './components/UserManagement/UpdateUserInfo';
+import UserProfile from './components/UserManagement/UserProfile';
+import NavBar from './components/NavigationBar';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
+    <NavBar />
     <div className="App">
       <Switch>
       <Route exact path="/login">
-            <LoginPage />
+            <Login />
           </Route>
           <Route exact path="/register">
             <Register />
           </Route>
+          <Route exact path="/updateuserprofile">
+            <UpdateUserInfo />
+          </Route>
+          <Route exact path="/user/profile">
+            <UserProfile />
+          </Route>
+         
           </Switch>
     </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
