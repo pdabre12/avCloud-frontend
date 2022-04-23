@@ -216,6 +216,15 @@
       "request": {
         "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"use_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": "http://localhost:3000/cars",
         "description": "post a new car"
       },
