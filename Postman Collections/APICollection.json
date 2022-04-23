@@ -200,9 +200,9 @@
         "disableBodyPruning": true
       },
       "request": {
-        "method": "POST",
+        "method": "GET",
         "header": [],
-        "url": "http://localhost:3000/cars",
+        "url": "http://localhost:3000/cars/5",
         "description": "get info about a specific car"
       },
       "response": []
