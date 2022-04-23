@@ -237,7 +237,7 @@
         "disableBodyPruning": true
       },
       "request": {
-        "method": "GET",
+        "method": "DELETE",
         "header": [],
         "url": "http://localhost:3000/cars/4"
       },
