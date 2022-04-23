@@ -229,6 +229,19 @@
         "description": "post a new car"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/cars/{car_id}",
+      "id": "6668ba73-6d12-4502-964c-4993fbcbb0af",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/cars/4"
+      },
+      "response": []
     }
   ]
 }
