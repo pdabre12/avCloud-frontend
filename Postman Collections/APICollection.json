@@ -244,7 +244,7 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/bookings/{user_name}",
+      "name": "http://localhost:3000/bookings",
       "id": "af02821d-70df-4bcd-9bdb-3cd6292836ba",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
