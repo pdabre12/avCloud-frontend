@@ -14,7 +14,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "http://localhost:3000/test",
+        "url": "http://18.222.3.53/test",
         "description": "test API is alive"
       },
       "response": []
