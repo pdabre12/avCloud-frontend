@@ -78,6 +78,32 @@ router.put('/users/:user_name', async function(req, res, next) {
 });
 
 
+// *********** ADMINS ***********
+
+/* POST add admin */
+router.post('/admins', async function(req, res, next) {
+  console.log("**** POST **** New Admin ****");
+  try {
+    res.json(await queries.postAdmin(req.body));
+  } catch (err) {
+    console.error(`Error while adding Admin. `, err.message);
+    next(err);
+  }
+});
+
+
+/* POST login credentials */
+router.post('/admins/login', async function(req, res, next) {
+  console.log("**** POST **** Amdin Login ****");
+  try {
+    res.json(await queries.loginAdmin(req.body));
+  } catch (err) {
+    console.error(`Error while logging in. `, err.message);
+    next(err);
+  }
+});
+
+
 // *********** CARS ***********
 
 /* POST new car */

@@ -37,6 +37,7 @@ async function postUser(user){
 
 
 async function loginUser(user){
+  var username = 'not_valid';
   const result = await db.query(
     `SELECT user_pw FROM users WHERE user_name = '${user.user_name}'`
   );
@@ -44,17 +45,22 @@ async function loginUser(user){
 
 // ref: https://stackoverflow.com/questions/48782788/convert-nodejs-mysql-result-to-accessible-json-object
   var jsonObj = Object.assign({}, result[0]);
-  // console.log(jsonObj.user_pw);
+  // console.log(jsonObj);
+  if (Object.keys(jsonObj).length === 0) {
+    message = 'User does not exist';
+  } else {
+    var pw_sha = helper.decrypt(jsonObj.user_pw);
+    // console.log(pw_sha);
 
-  var pw_sha = helper.decrypt(jsonObj.user_pw);
-  // console.log(pw_sha);
+    if (pw_sha === user.user_pw) {
+      message = 'Log in successfully!';
+      username = user.user_name;
+    }
+    else 
+      message = 'Error in logging in. ';
+  }
 
-  if (pw_sha === user.user_pw) 
-    message = 'Log in successfully!';
-  else 
-    message = 'Error in logging in. ';
-
-  return {message};
+  return {username, message};
 }
 
 
@@ -98,6 +104,53 @@ async function putUser(user, user_name){
   }
 
   return {message};
+}
+
+
+// *********** ADMINS ***********
+
+async function postAdmin(admin){
+  var pw_sha = helper.encrypt(admin.admin_pw);
+  // console.log(pw_sha);
+
+  const result = await db.query(
+    `INSERT INTO admins VALUES ('${admin.admin_id}', '${pw_sha}')`);
+
+  let message = 'Error in adding admin. ';
+
+  if (result.affectedRows) {
+    message = 'New admin created successfully!';
+  }
+
+  return {message};
+}
+
+
+async function loginAdmin(admin){
+  var admin_id = 'not_valid';
+  const result = await db.query(
+    `SELECT admin_pw FROM admins WHERE admin_id = '${admin.admin_id}'`
+  );
+  // console.log(result);
+
+  var jsonObj = Object.assign({}, result[0]);
+  // console.log(jsonObj);
+
+  if (Object.keys(jsonObj).length === 0) {
+    message = 'Admin does not exist';
+  } else {
+    var pw_sha = helper.decrypt(jsonObj.admin_pw);
+    // console.log(pw_sha);
+
+    if (pw_sha === admin.admin_pw) {
+      message = 'Log in successfully!';
+      admin_id = admin.admin_id;
+    }
+    else 
+      message = 'Error in logging in. ';
+  }
+
+  return {admin_id, message};
 }
 
 
@@ -265,6 +318,8 @@ async function putEnd(invoice, booking_id){
   deleteUser,
   getOneUser,
   putUser,
+  postAdmin,
+  loginAdmin,
   postCar,
   getOneCar,
   deleteCar,
