@@ -315,6 +315,20 @@
         "description": "update pickup time"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/trip/end/{booking_id}",
+      "id": "19210e08-2dcc-480e-acc6-3d7916974083",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": "http://localhost:3000/trip/end/2",
+        "description": "end a trip add cost, distance, end time to orders"
+      },
+      "response": []
     }
   ]
 }
