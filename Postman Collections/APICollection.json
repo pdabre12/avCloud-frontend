@@ -81,7 +81,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"user_name\": \"user1\",\n    \"user_pw\": \"new_pw11\"\n}",
+          "raw": "{\n    \"user_name\": \"user3\",\n    \"user_pw\": \"new_pw11\"\n}",
           "options": {
             "raw": {
               "language": "json"
