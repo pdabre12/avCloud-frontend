@@ -327,7 +327,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "",
+          "raw": "{\n    \"cost\": 0,\n    \"distance\": 0\n}",
           "options": {
             "raw": {
               "language": "json"
