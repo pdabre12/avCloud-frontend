@@ -288,6 +288,19 @@
         "description": "add a booking for user"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/trip/start/{booking_id}",
+      "id": "bc60858a-db59-4d40-afd6-faa85c1093bd",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:3000/trip/start/1"
+      },
+      "response": []
     }
   ]
 }
