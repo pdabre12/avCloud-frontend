@@ -5,7 +5,7 @@ import { Navbar, Card, Col, Row, Spinner } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 
 const UserProfile = (props) => {
-  const [userDetails, setUserDetails] = useState({ firstname: "pratik" });
+  const [userDetails, setUserDetails] = useState(null);
   const [userBookings, setUserBookings] = useState();
   const history = useHistory();
   const [values, handleChange] = UseForm({
@@ -19,7 +19,7 @@ const UserProfile = (props) => {
     if (user !== null && user !== undefined) {
       setUserDetails(JSON.parse(user));
     } else {
-    //   history.push('/login');
+      history.push('/login');
     }
   }, []);
 
