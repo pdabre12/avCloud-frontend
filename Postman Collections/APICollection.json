@@ -309,7 +309,7 @@
         "disableBodyPruning": true
       },
       "request": {
-        "method": "POST",
+        "method": "PUT",
         "header": [],
         "url": "http://localhost:3000/trip/pickup/2",
         "description": "update pickup time"
