@@ -117,16 +117,28 @@ router.delete('/cars/:car_id', async function(req, res, next) {
 });
 
 
-/* GET nearby idle cars */
-router.get('/car/nearby', async function(req, res, next) {
-  console.log("**** GET **** Nearby Car Info ****");
+/* PUT update car info */
+router.put('/cars/:car_id', async function(req, res, next) {
+  console.log("**** PUT **** Update Car info ****");
   try {
-    res.json(await queries.getCarNearBy(req.body));
+    res.json(await queries.putCar(req.body, req.params.car_id));
   } catch (err) {
-    console.error(`Error getting information about nearby car. `, err.message);
+    console.error(`Error while updating car. `, err.message);
     next(err);
   }
 });
+
+
+// /* GET nearby idle cars */
+// router.get('/car/nearby', async function(req, res, next) {
+//   console.log("**** GET **** Nearby Car Info ****");
+//   try {
+//     res.json(await queries.getCarNearBy(req.body));
+//   } catch (err) {
+//     console.error(`Error getting information about nearby car. `, err.message);
+//     next(err);
+//   }
+// });
 
 
 // *********** Booking ***********

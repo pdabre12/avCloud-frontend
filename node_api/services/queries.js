@@ -148,26 +148,37 @@ async function deleteCar(car_id){
 }
 
 
-async function getCarNearBy(location){
-  var radius = location.radius;
-  const query = `SELECT * FROM cars WHERE use_state = 'idle' AND car_loc_x BETWEEN ? AND ? AND car_loc_y BETWEEN ? AND ?`;
-  const rows = await db.query(query, [location.x - radius, location.x + radius, location.y - radius, location.y + radius]);
+async function putCar(car, car_id){
+  const query = 'UPDATE `cars` SET moving_state = ?, car_loc_x = ?, car_loc_y = ? WHERE car_id = ?';
+  const result = await db.query( query, [car.moving_state, car.car_loc_x, car.car_loc_y, car_id]);
 
-  const data = helper.emptyOrRows(rows);
+  let message = 'Error in updating car info. ';
 
-  return {
-    data
+  if (result.affectedRows) {
+    message = 'Car info updated successfully!';
   }
+
+  return {message};
 }
+
+// async function getCarNearBy(location){
+//   var radius = location.radius;
+//   const query = `SELECT * FROM cars WHERE use_state = 'idle' AND car_loc_x BETWEEN ? AND ? AND car_loc_y BETWEEN ? AND ?`;
+//   const rows = await db.query(query, [location.x - radius, location.x + radius, location.y - radius, location.y + radius]);
+
+//   const data = helper.emptyOrRows(rows);
+
+//   return {
+//     data
+//   }
+// }
 
 // *********** BOOKINGS ***********
 
 async function postBooking(booking, user_name){
-  const result = await db.query(
-    `INSERT INTO bookings (reserve_time, start_loc_x, start_loc_y, destination_loc_x, destination_loc_y, customer_name, b_car_id)
-    VALUES 
-    ('${booking.reserve_time}', '${booking.start_loc_x}', '${booking.start_loc_y}', '${booking.destination_loc_x}', '${booking.destination_loc_y}', '${user_name}', '${booking.b_car_id}')`
-  );
+  const query = `INSERT INTO bookings (reserve_time, start_loc, destination_loc, customer_name, b_car_id)
+    VALUES (?, ?, ?, ?, ?)`;
+  const result = await db.query( query, [new Date(), booking.start_loc, booking.destination_loc, user_name, booking.car_id]);
 
   let message = 'Error in posting booking. ';
 
@@ -194,9 +205,9 @@ async function postStart(booking_id){
     VALUES (?, ?, ?)`;
   const result = await db.query( query, [new Date(), jsonObj.customer_name, booking_id]);
 
-  // change car state to "in use"
+  // change car state to "active"
   const after = await db.query(
-    `UPDATE cars SET use_state = 'in use' WHERE car_id = '${jsonObj.car_id}'`
+    `UPDATE cars SET use_state = 'active' WHERE car_id = '${jsonObj.car_id}'`
   );
 
   let message = 'Error in starting trip. ';
@@ -234,9 +245,9 @@ async function putEnd(invoice, booking_id){
   const query = `UPDATE orders SET finish_time = ?, cost = ?, distance = ? WHERE o_booking_id = ?`;
   const result = await db.query( query, [new Date(), invoice.cost, invoice.distance, booking_id]);
 
-  // change car state to "idle"
+  // change car state to "connected" which indicates it can be booked later
   const after = await db.query(
-    `UPDATE cars SET use_state = 'idle' WHERE car_id = '${jsonObj.car_id}'`
+    `UPDATE cars SET use_state = 'connected' WHERE car_id = '${jsonObj.car_id}'`
   );
 
   let message = 'Error in ending trip. ';
@@ -257,7 +268,8 @@ async function putEnd(invoice, booking_id){
   postCar,
   getOneCar,
   deleteCar,
-  getCarNearBy,
+  putCar,
+  // getCarNearBy,
   postBooking,
   postStart,
   putPickup,

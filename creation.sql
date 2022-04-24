@@ -5,16 +5,17 @@ use avCloud_db;
 drop TABLE if exists cars;
 CREATE TABLE cars (
 car_id int not null AUTO_INCREMENT PRIMARY KEY,
-use_state varchar(20) not null,
+use_state varchar(10) not null default 'active',
+moving_state varchar(10) not null default 'idle',
 car_type varchar(20) not null,
 -- need to confirm
 car_loc_x float(4) not null,
 car_loc_y float(4) not null
 );
 
-delete from cars;
-INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('idle', 'SUV', 1234.123, 222.2);
-INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('in use', 'audi.a2', 1234.123, 222.2);
+truncate table cars;
+INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('connected', 'audi.tt', 111.1, 222.3);
+INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('connected', 'audi.a2', 222.2, 33.3);
 SELECT * FROM cars;
 
 drop TABLE if exists admins;
@@ -48,8 +49,8 @@ user_phone varchar(10) not null
 
 SET SQL_SAFE_UPDATES = 0;
 delete from users;
-INSERT INTO users VALUES('','user1', 'juehqhwrwFbsM/O4yA7oag==', 'user1@gmail.com', '6668889999');
-INSERT INTO users VALUES('','user2', '93Gow7kd/lywdRya3QH3IepTIgkEXLfCKSo1ob/Kr2M=', 'user2@gmail.com', '6667779999');
+INSERT INTO users VALUES('','user1', sha1('text'), 'user1@gmail.com', '6668889999');
+INSERT INTO users VALUES('','user2', sha1('thisIsPW'), 'user2@gmail.com', '6667779999');
 -- INSERT INTO users(user_name, user_pw, user_email, user_phone) VALUES ('user3', 'userpw3', 'user3@gmail.com', '6667772222');
 SELECT * FROM users;
 
@@ -58,10 +59,8 @@ drop TABLE if exists bookings;
 CREATE TABLE bookings (
 booking_id int not null AUTO_INCREMENT PRIMARY KEY,
 reserve_time TIMESTAMP not null,
-start_loc_x float(4) not null,
-start_loc_y float(4) not null,
-destination_loc_x float(4) not null,
-destination_loc_y float(4) not null,
+start_loc varchar(40) not null,
+destination_loc varchar(40) not null,
 customer_name varchar(20) not null,
 b_car_id int not null, 
 foreign key (customer_name) references users(user_name) on update cascade,
@@ -82,4 +81,4 @@ foreign key (customer_name) references users(user_name) on update cascade,
 foreign key (o_booking_id) references bookings(booking_id) on update cascade
 );
 
-truncate table orders;
+truncate table bookings;
