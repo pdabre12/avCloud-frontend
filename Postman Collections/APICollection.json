@@ -74,7 +74,7 @@
             }
           }
         },
-        "url": "http://localhost:3000/users/login",
+        "url": "http://18.222.3.53/users/login",
         "description": "check user login credential"
       },
       "response": []
