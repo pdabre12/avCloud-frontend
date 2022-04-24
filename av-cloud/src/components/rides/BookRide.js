@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,38 +14,60 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FindSourceAndDestination from './findSourceAndDestination';
 import RideList from './RideList';
 import ReviewRide from './ReviewRide';
-import { StepConnector } from '@mui/material';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 
 const steps = ['Enter source and destination', 'Choose your car', 'Finalize your ride'];
 
 
 
-const theme = createTheme();
 
 export default function BookRide() {
   const [activeStep, setActiveStep] = useState(0);
   const [ride, setRide] = useState();
   const [loading, setLoading] = useState();
+  const history = useHistory();
+
+
+  const [userDetails , setUserDetails] =useState(null);
+
 //   const authContext = useContext(AuthContext);
 //   const {user} = authContext;
-const user={
-    'name':'pratik'
-}
+
+useEffect(() => {
+  return () => {
+    const loggedInUser = localStorage.getItem("user");
+
+    if (loggedInUser) {
+      setUserDetails(JSON.parse(loggedInUser));
+      //   navigate(-1);
+    }
+    else{
+      history.replace('/login')
+    }
+  };
+}, []);
+
+
   const handleNext = async () => {
     setActiveStep(activeStep + 1);
-//     if(activeStep == 2){
-//       const resp = await bookRide(ride, user);
-//       if(resp.status === 200){
-//         setRide(resp.data.payload);
-//         setLoading(false);
-//       }
-//       else{
-//         console.log('Error Occured', resp.data.payload.message);
-//       }
-//     }
-//   };
-  }
+    if(activeStep == 2){
+      axios.post(`http://localhost:3000/bookings/${userDetails.user_name}`)
+      .then(resp =>{
+        if(resp.status === 200){
+          setRide(resp.data.data);
+          setLoading(false);
+        }
+        else{
+          console.log('Error Occured', resp.data.message);
+        }
+      }
+
+      )}
+      
+  };
+  
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);

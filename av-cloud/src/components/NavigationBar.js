@@ -7,33 +7,33 @@ function NavBar() {
   const history = useHistory();
   const [userDetails, setUserDetails] = useState(null);
 
-//   useEffect(() => {
-// //     setInterval(() => {
-// //       const user = localStorage.getItem("user");
-// //       if (
-// //         user != null &&
-// //         user != undefined &&
-// //         JSON.stringify(userDetails) != user
-// //       ) {
-// //         setUserDetails(JSON.parse(user));
-// //       }
-// //     }, 500);
-// //   }, []);
+  useEffect(() => {
+    setInterval(() => {
+      const user = localStorage.getItem("user");
+      if (
+        user != null &&
+        user != undefined &&
+        JSON.stringify(userDetails) != user
+      ) {
+        setUserDetails(JSON.parse(user));
+      }
+    }, 500);
+  }, []);
 
   const logoutClicked = (e) => {
     e.preventDefault();
-    // localStorage.removeItem("user");
+    localStorage.removeItem("user");
     setUserDetails(null);
-    history.push("/");
-  };
-  const loginClicked = (e) => {
-    e.preventDefault();
     history.push("/login");
   };
-  const signUpClicked = (e) => {
-    e.preventDefault();
-    history.push("/register");
-  };
+  // const loginClicked = (e) => {
+  //   e.preventDefault();
+  //   history.push("/login");
+  // };
+  // const signUpClicked = (e) => {
+  //   e.preventDefault();
+  //   history.push("/register");
+  // };
 
   return (
     <Navbar
@@ -70,14 +70,13 @@ function NavBar() {
             ) : (
               <div>
                 <Button
-                  onClick={loginClicked}
                   variant="outline-primary"
                   style={{ marginRight: "10px" }}
                 >
-                  Login
+                  <a style={{textDecoration:'none'}} href='/login'>Login</a>
                 </Button>
-                <Button onClick={signUpClicked} variant="outline-primary">
-                  Signup
+                <Button  variant="outline-primary">
+                <a style={{textDecoration:'none'}} href='/register'>Register</a>
                 </Button>
               </div>
             )}

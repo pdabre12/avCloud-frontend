@@ -8,8 +8,8 @@ import { login } from "../../features/autheticationfeature";
 
 export default function LoginForm() {
   const history = useHistory();
-  const [userDetails, setUserDetails] = useState();
-  const [userProfile, setUserProfile] = useState();
+  const [userDetails, setUserDetails] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
 
   const [user, setuser] = useState({
     email: "",
@@ -22,8 +22,7 @@ export default function LoginForm() {
 
       if (loggedInUser) {
         setUserDetails(JSON.parse(loggedInUser));
-        window.alert("Already logged in");
-        history.push("/user/profile");
+        history.push("/");
         //   navigate(-1);
       }
     };
@@ -37,7 +36,8 @@ export default function LoginForm() {
     event.preventDefault();
     console.log(user);
 
-    const response = login(user);
+    axios.post("http://localhost:3000/users/login",user)
+    .then(response=>{
     if (response.status == 200) {
       localStorage.setItem("user", JSON.stringify(response.data));
       setUserProfile(response.data);
@@ -47,6 +47,7 @@ export default function LoginForm() {
       console.log("Unauthorized");
       console.log(response);
     }
+  })
   };
 
   //check if user is already logged in
@@ -128,12 +129,12 @@ export default function LoginForm() {
                       </Col>
                       <Col>
                         {" "}
-                        <Link
-                          to="/register"
+                        <a 
+                          href="/register"
                           style={{ color: "green", fontStyle: "italic" }}
                         >
                           New User? Register
-                        </Link>
+                        </a>
                       </Col>
                     </Row>
                   </form>

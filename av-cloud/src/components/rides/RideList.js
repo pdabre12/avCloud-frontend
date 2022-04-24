@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useLocation} from 'react-router-dom';
+import axios from 'axios';
 
 function createData(rideNumber, carNumber, date,  charge , status) {
   return { rideNumber, carNumber, charge, date ,status };
@@ -31,9 +32,7 @@ const rows = [
 
 export default function RideList() {
 
-    const location = useLocation();
-    console.log(location);
-
+    
     // const {persona } = location.state;
     const [rideList, setRideList] = useState();
     const [loading, setLoading] = useState(true);
@@ -45,68 +44,69 @@ export default function RideList() {
     useEffect(() => {
         fetchRideList();
     }, []);
-    // console.log(authContext);
 
     const fetchRideList = async () => {
-        // const {user} = authContext;
         
-        // const resp = await fetchRideListFromDB(user.userId, persona);
-        // if(resp.status === 200){
-        //     const rows = [];
-        //     console.log(resp.data.payload);
-        //     resp.data.payload.forEach(el=> {
-        //         console.log(el);
-        //         const { carNumber, carId, rideId, source, 
-        //             destination, status, chargePerDay} = el;
-        //         rows.push({
-        //             carId,
-        //             carNumber, 
-        //             rideId, 
-        //             source, 
-        //             destination,
-        //             status, 
-        //             chargePerDay,
-        //         })
-        //     });
-        
-            setRideList(rows);
-            setLoading(false);
-        }
-        // else{
-        //     console.log(resp.data.message);
-        // }
+        axios.get('http://localhost:3000/cars')
+        .then(res =>{
+            if(res.status === 200){
+                const rows = [];
+                console.log(res.data.data);
+                res.data.data.map(el=> {
+                    console.log(el);
+                    const { car_id, car_type, car_loc_x , car_loc_y,
+                        use_state } = el;
+                    rows.push({
+                        car_id ,
+                        car_loc_x,
+                        car_loc_y,
+                        car_type,
+                        use_state
 
+                    })
+                });
+            
+                setRideList(rows);
+                setLoading(false);
+            }
+            else{
+                console.log(res.message);
+            }
     
+        })
+        
+    }
 
     return (
         <>
         {!loading && (
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple-table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple-table" >
             <TableHead>
             <TableRow>
-                <TableCell>Ride Number</TableCell>
-                <TableCell>Source</TableCell>
-                <TableCell align="right">Destination</TableCell>
-                <TableCell align="right">Charge Per Daye</TableCell>
-                <TableCell align="right">Car Number</TableCell>
-                <TableCell align="right">Status</TableCell>
+                {/* <TableCell>Ride Number</TableCell> */}
+                <TableCell  align="center">X co-ordinate Location</TableCell>
+                <TableCell align="center">Y co-ordinate Location</TableCell>
+                {/* <TableCell align="right">Charge Per Daye</TableCell> */}
+                <TableCell align="center">Car Number</TableCell>
+                <TableCell align="center">Status</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
             {rideList?.map((row) => (
                 <TableRow
-                key={row?.carId}
+                key={row?.car_id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                onClick={() => console.log('tem')}
                 >
-                <TableCell component="th" scope="row">
+                {/* <TableCell component="th" scope="row">
                     {row?.rideId}
-                </TableCell>
-                <TableCell align="right">{row?.source}</TableCell>
-                <TableCell align="right">{row?.destination}</TableCell>
-                <TableCell align="right">{row?.chargePerDay}</TableCell>
-                <TableCell align="right">{row?.carNumber}</TableCell>
-                <TableCell style={{color:' green'}}align="right">{row?.status}</TableCell>
+                </TableCell> */}
+                <TableCell align="center">{row?.car_loc_x}</TableCell> 
+                <TableCell align="center">{row?.car_loc_y}</TableCell> 
+                <TableCell align="center">{row?.car_type}</TableCell>
+                <TableCell align="center" style={{color:' green'}}>{row?.use_state}</TableCell> 
+                
 
                 </TableRow>
             ))}
