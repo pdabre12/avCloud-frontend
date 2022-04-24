@@ -104,14 +104,14 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"user_pw\": \"new_pw22\",\n    \"user_email\": \"update22@gmail.com\",\n    \"user_phone\": \"6668882222\"\n}",
+          "raw": "{\n    \"user_pw\": \"new_pw12\",\n    \"user_email\": \"update2@gmail.com\",\n    \"user_phone\": \"6661112222\"\n}",
           "options": {
             "raw": {
               "language": "json"
             }
           }
         },
-        "url": "http://localhost:3000/users/user2",
+        "url": "http://18.222.3.53/users/user1",
         "description": "use username to query info about one specific user"
       },
       "response": []
