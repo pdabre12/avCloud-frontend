@@ -277,7 +277,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"radius\": 2,\n    \"start_loc_y\": 56.2,\n    \"destination_loc_x\": 2000,\n    \"destination_loc_y\": 70,\n    \"b_car_id\": 6\n}",
+          "raw": "{\n    \"radius\": 2,\n    \"x\": 56.2,\n    \"y\": 2000\n}",
           "options": {
             "raw": {
               "language": "json"
