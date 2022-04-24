@@ -4,13 +4,18 @@ use avCloud_db;
 
 drop TABLE if exists cars;
 CREATE TABLE cars (
-car_id varchar(9) not null PRIMARY KEY,
+car_id int not null AUTO_INCREMENT PRIMARY KEY,
 use_state varchar(20) not null,
 car_type varchar(20) not null,
 -- need to confirm
 car_loc_x float(4) not null,
 car_loc_y float(4) not null
 );
+
+delete from cars;
+INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('idle', 'SUV', 1234.123, 222.2);
+INSERT INTO cars(use_state, car_type, car_loc_x, car_loc_y) VALUES('in use', 'audi.a2', 1234.123, 222.2);
+SELECT * FROM cars;
 
 drop TABLE if exists admins;
 CREATE TABLE admins (
@@ -26,7 +31,7 @@ select * from admins;
 drop TABLE if exists manage;
 CREATE TABLE manage (
 m_admin_id varchar(9) not null,
-m_car_id varchar(9) not null,
+m_car_id int not null,
 PRIMARY KEY (m_admin_id, m_car_id),
 foreign key (m_admin_id) references admins(admin_id) on update cascade,
 foreign key (m_car_id) references cars(car_id) on update cascade
@@ -51,25 +56,30 @@ SELECT * FROM users;
 
 drop TABLE if exists bookings;
 CREATE TABLE bookings (
-booking_id varchar(9) not null PRIMARY KEY,
+booking_id int not null AUTO_INCREMENT PRIMARY KEY,
+reserve_time TIMESTAMP not null,
 start_loc_x float(4) not null,
 start_loc_y float(4) not null,
 destination_loc_x float(4) not null,
 destination_loc_y float(4) not null,
-customer_id int not null,
-b_car_id varchar(9) not null, 
-foreign key (customer_id) references users(user_id) on update cascade,
+customer_name varchar(20) not null,
+b_car_id int not null, 
+foreign key (customer_name) references users(user_name) on update cascade,
 foreign key (b_car_id) references cars(car_id) on update cascade
 );
 
 drop TABLE if exists orders;
 CREATE TABLE orders (
-order_id varchar(9) not null PRIMARY KEY,
-start_time varchar(14) not null,
-pickup_time varchar(14) not null,
-finish_time varchar(14) not null,
-cost float(6) not null,
-distance float(6) not null,
-o_booking_id varchar(9) not null, 
+order_id int not null AUTO_INCREMENT PRIMARY KEY,
+start_time TIMESTAMP not null default "2000-01-01 00:00:00",
+pickup_time TIMESTAMP not null default "2000-01-01 00:00:00",
+finish_time TIMESTAMP not null default "2000-01-01 00:00:00",
+cost float(6) not null default 0,
+distance float(6) not null default 0,
+customer_name varchar(20) not null,
+o_booking_id int not null unique, 
+foreign key (customer_name) references users(user_name) on update cascade,
 foreign key (o_booking_id) references bookings(booking_id) on update cascade
 );
+
+truncate table orders;

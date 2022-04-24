@@ -14,6 +14,8 @@ async function getMultiple(table_name){
 }
 
 
+// *********** USERS ***********
+
 async function postUser(user){
   var pw_sha = helper.encrypt(user.user_pw);
   // console.log(pw_sha);
@@ -70,6 +72,7 @@ async function deleteUser(user_name){
   return {message};
 }
 
+
 async function getOneUser(user_name){
   const row = await db.query(
     `SELECT * FROM users WHERE user_name='${user_name}'`
@@ -82,24 +85,163 @@ async function getOneUser(user_name){
   }
 }
 
+
 async function putUser(user, user_name){
   var new_pw_sha = helper.encrypt(user.user_pw);
   const query = 'UPDATE `users` SET user_pw = ?, user_email = ?, user_phone = ? WHERE user_name = ?';
   const result = await db.query(query, [new_pw_sha, user.user_email, user.user_phone, user_name]);
 
-  // const result = await db.query(
-  //   `UPDATE users
-  //    SET user_pw = '${new_pw_sha}',
-  //        user_email = '${user_email}',
-  //        user_phone = '${user_phone}'
-  //     WHERE user_name='${user_name}'
-  //    `
-  // );
-
   let message = 'Error in updating user. ';
 
   if (result.affectedRows) {
     message = 'User updated successfully!';
+  }
+
+  return {message};
+}
+
+
+// *********** CARS ***********
+
+async function postCar(car){
+  const result = await db.query(
+    `INSERT INTO cars (use_state, car_type, car_loc_x, car_loc_y)
+    VALUES 
+    ('${car.use_state}', '${car.car_type}', '${car.car_loc_x}', '${car.car_loc_y}')`
+  );
+
+  let message = 'Error in posting a car. ';
+
+  if (result.affectedRows) {
+    message = 'New car posted successfully!';
+  }
+
+  return {message};
+}
+
+
+async function getOneCar(car_id){
+  const row = await db.query(
+    `SELECT * FROM cars WHERE car_id='${car_id}'`
+  );
+
+  const data = helper.emptyOrRows(row);
+
+  return {
+    data
+  }
+}
+
+
+async function deleteCar(car_id){
+  const result = await db.query(
+    `DELETE FROM cars WHERE car_id='${car_id}'`
+  );
+
+  let message = 'Error in deleting car. ';
+
+  if (result.affectedRows) {
+    message = 'Car deleted successfully!';
+  }
+
+  return {message};
+}
+
+
+async function getCarNearBy(location){
+  var radius = location.radius;
+  const query = `SELECT * FROM cars WHERE use_state = 'idle' AND car_loc_x BETWEEN ? AND ? AND car_loc_y BETWEEN ? AND ?`;
+  const rows = await db.query(query, [location.x - radius, location.x + radius, location.y - radius, location.y + radius]);
+
+  const data = helper.emptyOrRows(rows);
+
+  return {
+    data
+  }
+}
+
+// *********** BOOKINGS ***********
+
+async function postBooking(booking, user_name){
+  const result = await db.query(
+    `INSERT INTO bookings (reserve_time, start_loc_x, start_loc_y, destination_loc_x, destination_loc_y, customer_name, b_car_id)
+    VALUES 
+    ('${booking.reserve_time}', '${booking.start_loc_x}', '${booking.start_loc_y}', '${booking.destination_loc_x}', '${booking.destination_loc_y}', '${user_name}', '${booking.b_car_id}')`
+  );
+
+  let message = 'Error in posting booking. ';
+
+  if (result.affectedRows) {
+    message = 'New booking posted successfully!';
+  }
+
+  return {message};
+}
+
+
+// *********** TRIP ***********
+
+async function postStart(booking_id){
+  // get booking info first
+  const pre = await db.query(
+    `SELECT b_car_id as car_id, customer_name FROM bookings WHERE booking_id = '${booking_id}'`
+  );
+
+  var jsonObj = Object.assign({}, pre[0]);
+
+  // inser start time to orders
+  const query = `INSERT INTO orders (start_time, customer_name, o_booking_id)
+    VALUES (?, ?, ?)`;
+  const result = await db.query( query, [new Date(), jsonObj.customer_name, booking_id]);
+
+  // change car state to "in use"
+  const after = await db.query(
+    `UPDATE cars SET use_state = 'in use' WHERE car_id = '${jsonObj.car_id}'`
+  );
+
+  let message = 'Error in starting trip. ';
+  if (result.affectedRows) {
+    message = 'Trip started successfully!';
+  }
+
+  return {message};
+}
+
+
+async function putPickup(booking_id){
+  // inser pickup time to orders
+  const query = `UPDATE orders SET pickup_time = ? WHERE o_booking_id = ?`;
+  const result = await db.query( query, [new Date(), booking_id] );
+
+  let message = 'Error in insert pickup time. ';
+  if (result.affectedRows) {
+    message = 'Pickup time inserted successfully!';
+  }
+
+  return {message};
+}
+
+
+async function putEnd(invoice, booking_id){
+  // get booking info first
+  const pre = await db.query(
+    `SELECT b_car_id as car_id, customer_name FROM bookings WHERE booking_id = '${booking_id}'`
+  );
+
+  var jsonObj = Object.assign({}, pre[0]);
+
+  // inser end time to orders
+  const query = `UPDATE orders SET finish_time = ?, cost = ?, distance = ? WHERE o_booking_id = ?`;
+  const result = await db.query( query, [new Date(), invoice.cost, invoice.distance, booking_id]);
+
+  // change car state to "idle"
+  const after = await db.query(
+    `UPDATE cars SET use_state = 'idle' WHERE car_id = '${jsonObj.car_id}'`
+  );
+
+  let message = 'Error in ending trip. ';
+  if (result.affectedRows) {
+    message = 'Trip end successfully!';
   }
 
   return {message};
@@ -111,5 +253,13 @@ async function putUser(user, user_name){
   loginUser,
   deleteUser,
   getOneUser,
-  putUser
+  putUser,
+  postCar,
+  getOneCar,
+  deleteCar,
+  getCarNearBy,
+  postBooking,
+  postStart,
+  putPickup,
+  putEnd
 }
