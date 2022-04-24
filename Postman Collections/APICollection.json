@@ -194,6 +194,29 @@
       "response": []
     },
     {
+      "name": "http://localhost:3000/cars",
+      "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"use_state\": \"connected\",\n    \"moving_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/cars",
+        "description": "post a new car"
+      },
+      "response": []
+    },
+    {
       "name": "http://localhost:3000/cars/{car_id}",
       "id": "b860d931-1e09-4aad-aecb-17ac2c854295",
       "protocolProfileBehavior": {
@@ -227,29 +250,6 @@
         },
         "url": "http://localhost:3000/cars/1",
         "description": "update car info"
-      },
-      "response": []
-    },
-    {
-      "name": "http://localhost:3000/cars",
-      "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"use_state\": \"connected\",\n    \"moving_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:3000/cars",
-        "description": "post a new car"
       },
       "response": []
     },
