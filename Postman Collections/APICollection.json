@@ -194,29 +194,6 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/cars",
-      "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"use_state\": \"connected\",\n    \"moving_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:3000/cars",
-        "description": "post a new car"
-      },
-      "response": []
-    },
-    {
       "name": "http://localhost:3000/cars/{car_id}",
       "id": "b860d931-1e09-4aad-aecb-17ac2c854295",
       "protocolProfileBehavior": {
@@ -241,7 +218,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"moving_state\": \"forward\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 123.3,\n    \"car_loc_y\": 224.5\n}",
+          "raw": "{\n    \"moving_state\": \"forward\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 111.0999984741211,\n    \"car_loc_y\": 222.3000030517578\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -250,6 +227,29 @@
         },
         "url": "http://localhost:3000/cars/1",
         "description": "update car info"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/cars",
+      "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"use_state\": \"connected\",\n    \"moving_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/cars",
+        "description": "post a new car"
       },
       "response": []
     },
@@ -277,14 +277,14 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reserve_time\": \"2022-04-20 13:15:00\",\n    \"start_loc\": \"San Jose\",\n    \"destination_loc\": \"One Washinton Square\",\n    \"car_id\": 1\n}",
+          "raw": "{\n    \"reserve_time\": \"2022-04-19 13:15:00\",\n    \"start_loc_x\": 2312.3,\n    \"start_loc_y\": 56.2,\n    \"destination_loc_x\": 2000,\n    \"destination_loc_y\": 70,\n    \"b_car_id\": 6\n}",
           "options": {
             "raw": {
               "language": "json"
             }
           }
         },
-        "url": "http://localhost:3000/bookings/user2",
+        "url": "http://localhost:3000/bookings/user1",
         "description": "add a booking for user"
       },
       "response": []
