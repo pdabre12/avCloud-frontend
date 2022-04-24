@@ -244,29 +244,6 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/bookings/{user_name}",
-      "id": "af02821d-70df-4bcd-9bdb-3cd6292836ba",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"reserve_time\": \"2022-04-19 13:15:00\",\n    \"start_loc_x\": 2312.3,\n    \"start_loc_y\": 56.2,\n    \"destination_loc_x\": 2000,\n    \"destination_loc_y\": 70,\n    \"b_car_id\": 6\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:3000/bookings/user1",
-        "description": "add a booking for user"
-      },
-      "response": []
-    },
-    {
       "name": "http://localhost:3000/car/nearby",
       "id": "0dcb22cf-81f7-4452-910f-8ce351cdbb8a",
       "protocolProfileBehavior": {
@@ -286,6 +263,29 @@
         },
         "url": "http://localhost:3000/car/nearby",
         "description": "get nearby cars"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/bookings/{user_name}",
+      "id": "af02821d-70df-4bcd-9bdb-3cd6292836ba",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reserve_time\": \"2022-04-19 13:15:00\",\n    \"start_loc_x\": 2312.3,\n    \"start_loc_y\": 56.2,\n    \"destination_loc_x\": 2000,\n    \"destination_loc_y\": 70,\n    \"b_car_id\": 6\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/bookings/user1",
+        "description": "add a booking for user"
       },
       "response": []
     }
