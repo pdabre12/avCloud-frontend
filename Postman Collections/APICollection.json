@@ -301,6 +301,20 @@
         "url": "http://localhost:3000/trip/start/2"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/trip/pickup/{booking_id}",
+      "id": "0d32d1b7-faef-4e07-8614-2f3fded35155",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:3000/trip/pickup/2",
+        "description": "update pickup time"
+      },
+      "response": []
     }
   ]
 }
