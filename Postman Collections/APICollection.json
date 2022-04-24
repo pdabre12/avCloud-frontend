@@ -325,6 +325,15 @@
       "request": {
         "method": "PUT",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": "http://localhost:3000/trip/end/2",
         "description": "end a trip add cost, distance, end time to orders"
       },
