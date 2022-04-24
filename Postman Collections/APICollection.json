@@ -122,7 +122,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"user_name\": \"user4\",\n    \"user_pw\": \"text\"\n}",
+          "raw": "{\n    \"user_name\": \"user5\",\n    \"user_pw\": \"text_pw\"\n}",
           "options": {
             "raw": {
               "language": "json"
