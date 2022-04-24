@@ -95,7 +95,7 @@
         "disableBodyPruning": true
       },
       "request": {
-        "method": "POST",
+        "method": "PUT",
         "header": [],
         "body": {
           "mode": "raw",
@@ -106,7 +106,7 @@
             }
           }
         },
-        "url": "http://localhost:3000/users",
+        "url": "http://localhost:3000/cars",
         "description": "add a new user"
       },
       "response": []
