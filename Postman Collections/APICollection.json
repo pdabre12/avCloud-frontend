@@ -48,47 +48,6 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/cars",
-      "id": "8caa18bf-1f47-481b-985e-9398205faa2c",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": "http://localhost:3000/cars",
-        "description": "get a list of all car info"
-      },
-      "response": []
-    },
-    {
-      "name": "http://localhost:3000/bookings",
-      "id": "213b1967-85c1-4044-9cf9-aab0ac456203",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": "http://localhost:3000/bookings",
-        "description": "get a list of all bookings"
-      },
-      "response": []
-    },
-    {
-      "name": "http://localhost:3000/orders",
-      "id": "497b34c9-fd97-480c-8661-a14898f66f01",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": "http://localhost:3000/orders"
-      },
-      "response": []
-    },
-    {
       "name": "http://localhost:3000/users",
       "id": "29f6f9b7-d0fa-4e11-9ad5-d9eb207ad528",
       "protocolProfileBehavior": {
@@ -195,6 +154,20 @@
     },
     {
       "name": "http://localhost:3000/cars",
+      "id": "8caa18bf-1f47-481b-985e-9398205faa2c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/cars",
+        "description": "get a list of all car info"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/cars",
       "id": "758182b2-bc5b-42a6-a8b9-e2aa8d916135",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
@@ -225,7 +198,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "http://localhost:3000/cars/5",
+        "url": "http://localhost:3000/cars/4",
         "description": "get info about a specific car"
       },
       "response": []
@@ -286,6 +259,33 @@
         },
         "url": "http://localhost:3000/bookings/user2",
         "description": "add a booking for user"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/bookings",
+      "id": "213b1967-85c1-4044-9cf9-aab0ac456203",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/bookings",
+        "description": "get a list of all bookings"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/orders",
+      "id": "497b34c9-fd97-480c-8661-a14898f66f01",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/orders"
       },
       "response": []
     },
