@@ -277,14 +277,14 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"radius\": 2,\n    \"x\": 56.2,\n    \"y\": 2000\n}",
+          "raw": "{\n    \"radius\": 2,\n    \"x\": 1235,\n    \"y\": 223\n}",
           "options": {
             "raw": {
               "language": "json"
             }
           }
         },
-        "url": "http://localhost:3000/cars/nearby",
+        "url": "http://localhost:3000/car/nearby",
         "description": "get nearby cars"
       },
       "response": []
