@@ -218,7 +218,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"use_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
+          "raw": "{\n    \"use_state\": \"connected\",\n    \"moving_state\": \"idle\",\n    \"car_type\": \"audi.tt\",\n    \"car_loc_x\": 1111.11,\n    \"car_loc_y\": 222.22\n}",
           "options": {
             "raw": {
               "language": "json"
