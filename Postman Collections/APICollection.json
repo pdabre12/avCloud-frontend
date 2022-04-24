@@ -267,7 +267,7 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/cars/nearby",
+      "name": "http://localhost:3000/car/nearby",
       "id": "0dcb22cf-81f7-4452-910f-8ce351cdbb8a",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
