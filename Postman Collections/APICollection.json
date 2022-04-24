@@ -244,29 +244,6 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/car/nearby",
-      "id": "0dcb22cf-81f7-4452-910f-8ce351cdbb8a",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"radius\": 2,\n    \"x\": 1110,\n    \"y\": 223\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:3000/car/nearby",
-        "description": "get nearby cars"
-      },
-      "response": []
-    },
-    {
       "name": "http://localhost:3000/bookings/{user_name}",
       "id": "af02821d-70df-4bcd-9bdb-3cd6292836ba",
       "protocolProfileBehavior": {
