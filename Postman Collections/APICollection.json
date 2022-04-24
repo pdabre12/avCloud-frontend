@@ -34,7 +34,7 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/users",
+      "name": "http://18.222.3.53/users",
       "id": "29f6f9b7-d0fa-4e11-9ad5-d9eb207ad528",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
