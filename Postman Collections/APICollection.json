@@ -20,7 +20,7 @@
       "response": []
     },
     {
-      "name": "http://localhost:3000/users",
+      "name": "http://18.222.3.53/users",
       "id": "503520bb-3533-44dd-b4d2-93a72e97d361",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
