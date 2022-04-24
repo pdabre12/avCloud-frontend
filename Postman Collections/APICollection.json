@@ -6,7 +6,7 @@
   },
   "item": [
     {
-      "name": "http://localhost:3000/test",
+      "name": "http://18.222.3.53/test",
       "id": "51d9c236-e7b4-4676-931a-410c021a8e6c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
@@ -30,20 +30,6 @@
         "header": [],
         "url": "http://localhost:3000/users",
         "description": "get a list of all user"
-      },
-      "response": []
-    },
-    {
-      "name": "http://localhost:3000/admins",
-      "id": "1eb94b60-dc74-40fc-af65-a5701b9bcaaf",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": "http://localhost:3000/admins",
-        "description": "get a list of all admin info"
       },
       "response": []
     },
