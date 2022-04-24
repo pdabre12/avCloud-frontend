@@ -315,6 +315,29 @@
         "description": "end a trip add cost, distance, end time to orders"
       },
       "response": []
+    },
+    {
+      "name": "http://localhost:3000/cars/{car_id}",
+      "id": "531b177d-da11-47e8-9e82-9da2646c0415",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"user_pw\": \"new_pw2\",\n    \"user_email\": \"update3@gmail.com\",\n    \"user_phone\": \"6668881113\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/cars/1",
+        "description": "update car info"
+      },
+      "response": []
     }
   ]
 }
