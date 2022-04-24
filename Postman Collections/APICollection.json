@@ -143,7 +143,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "http://localhost:3000/users/user3",
+        "url": "http://localhost:3000/users/user5",
         "description": "delete a user with user_name"
       },
       "response": []
