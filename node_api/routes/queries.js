@@ -155,6 +155,18 @@ router.put('/cars/:car_id', async function(req, res, next) {
 });
 
 
+/* GET available cars */
+router.get('/car/available', async function(req, res, next) {
+  console.log("**** GET **** Available Car Info ****");
+  try {
+    res.json(await queries.getAvailableCar());
+  } catch (err) {
+    console.error(`Error getting information about available car. `, err.message);
+    next(err);
+  }
+});
+
+
 // /* GET nearby idle cars */
 // router.get('/car/nearby', async function(req, res, next) {
 //   console.log("**** GET **** Nearby Car Info ****");

@@ -214,6 +214,18 @@ async function putCar(car, car_id){
   return {message};
 }
 
+async function getAvailableCar(){
+  const row = await db.query(
+    `SELECT * FROM cars WHERE use_state = 'connected'`
+  );
+
+  const data = helper.emptyOrRows(row);
+
+  return {
+    data
+  }
+}
+
 // async function getCarNearBy(location){
 //   var radius = location.radius;
 //   const query = `SELECT * FROM cars WHERE use_state = 'idle' AND car_loc_x BETWEEN ? AND ? AND car_loc_y BETWEEN ? AND ?`;
@@ -324,6 +336,7 @@ async function putEnd(invoice, booking_id){
   getOneCar,
   deleteCar,
   putCar,
+  getAvailableCar,
   // getCarNearBy,
   postBooking,
   postStart,

@@ -82,3 +82,4 @@ foreign key (o_booking_id) references bookings(booking_id) on update cascade
 );
 
 truncate table bookings;
+describe cars;
