@@ -6,7 +6,7 @@
   },
   "item": [
     {
-      "name": "http://18.222.3.53/test",
+      "name": "http://18.220.171.160/test",
       "id": "51d9c236-e7b4-4676-931a-410c021a8e6c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
