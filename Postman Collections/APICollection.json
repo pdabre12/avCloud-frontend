@@ -111,13 +111,13 @@
             }
           }
         },
-        "url": "http://18.222.3.53/users/user1",
+        "url": "http://18.220.171.160/users/user1",
         "description": "use username to query info about one specific user"
       },
       "response": []
     },
     {
-      "name": "http://18.222.3.53/users/{user_name}",
+      "name": "http://18.220.171.160/users/{user_name}",
       "id": "32b430e1-cfe1-4b89-ba91-f368de28b1e3",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
