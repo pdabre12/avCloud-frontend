@@ -1,119 +1,114 @@
-import React, {useState, useEffect, useContext} from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import {useLocation} from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import axios from "axios";
 
-function createData(rideNumber, carNumber, date,  charge , status) {
-  return { rideNumber, carNumber, charge, date ,status };
+function createData(rideNumber, carNumber, date, charge, status) {
+  return { rideNumber, carNumber, charge, date, status };
 }
 
 const rows = [
-  createData('1', '8CPA850', '11/10/2021', 16.0 ,"active"),
-  createData('2', '7YPN393', '11/09/2021', 29.0 ,"active"),
-  createData('3', '8AMF954', '11/09/2021', 56.0 ,"active"),
-  createData('4', '8AMF954', '10/19/2021', 76.0 ,"active"),
-  createData('5', '8AMF954', '10/09/2021', 76.0 ,"active"),
-  createData('6', '8AMF954', '10/06/2021', 146.0 ,"active"),
-  createData('7', '7MWL676', '09/30/2021', 122.0 ,"active"),
-  createData('8', '7MWL676', '09/29/2021', 102.0 ,"active"),
-  createData('9', '8AMF954', '09/19/2021', 56.0 ,"active"),
-  createData('10','8AMF954', '05/09/2021', 86.0 ,"active"),
-  createData('11', '8AMF954', '05/09/2021', 86.0 ,"inactive"),
-
+  createData("1", "8CPA850", "11/10/2021", 16.0, "active"),
+  createData("2", "7YPN393", "11/09/2021", 29.0, "active"),
+  createData("3", "8AMF954", "11/09/2021", 56.0, "active"),
+  createData("4", "8AMF954", "10/19/2021", 76.0, "active"),
+  createData("5", "8AMF954", "10/09/2021", 76.0, "active"),
+  createData("6", "8AMF954", "10/06/2021", 146.0, "active"),
+  createData("7", "7MWL676", "09/30/2021", 122.0, "active"),
+  createData("8", "7MWL676", "09/29/2021", 102.0, "active"),
+  createData("9", "8AMF954", "09/19/2021", 56.0, "active"),
+  createData("10", "8AMF954", "05/09/2021", 86.0, "active"),
+  createData("11", "8AMF954", "05/09/2021", 86.0, "inactive"),
 ];
 
+export default function RideList(props) {
+  // const {persona } = location.state;
+  const [rideList, setRideList] = useState();
+  const [loading, setLoading] = useState(true);
 
+  const { ride } = props;
 
-export default function RideList() {
+  useEffect(() => {
+    fetchRideList();
+  }, []);
 
-    
-    // const {persona } = location.state;
-    const [rideList, setRideList] = useState();
-    const [loading, setLoading] = useState(true);
+  const handleClick = (e) => {
+    e.preventDefault();
+    const { ride, setRide } = props;
 
+    setRide({
+      ...ride,
+      car_type: e.target.value,
+    });
+  };
 
-    
-    
-    
-    useEffect(() => {
-        fetchRideList();
-    }, []);
+  const fetchRideList = async () => {
+    axios.get("http://localhost:3000/cars").then((res) => {
+      if (res.status === 200) {
+        const rows = [];
+        console.log(res.data.data);
+        res.data.data.map((el) => {
+          console.log(el);
+          const { car_id, car_type, car_loc_x, car_loc_y, use_state } = el;
+          rows.push({
+            car_id,
+            car_loc_x,
+            car_loc_y,
+            car_type,
+            use_state,
+          });
+        });
 
-    const fetchRideList = async () => {
-        
-        axios.get('http://localhost:3000/cars')
-        .then(res =>{
-            if(res.status === 200){
-                const rows = [];
-                console.log(res.data.data);
-                res.data.data.map(el=> {
-                    console.log(el);
-                    const { car_id, car_type, car_loc_x , car_loc_y,
-                        use_state } = el;
-                    rows.push({
-                        car_id ,
-                        car_loc_x,
-                        car_loc_y,
-                        car_type,
-                        use_state
+        setRideList(rows);
+        setLoading(false);
+      } else {
+        console.log(res.message);
+      }
+    });
+  };
 
-                    })
-                });
-            
-                setRideList(rows);
-                setLoading(false);
-            }
-            else{
-                console.log(res.message);
-            }
-    
-        })
-        
-    }
-
-    return (
-        <>
-        {!loading && (
+  return (
+    <>
+      {!loading && (
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple-table" >
+          <Table sx={{ minWidth: 650 }} aria-label="simple-table">
             <TableHead>
-            <TableRow>
+              <TableRow>
                 {/* <TableCell>Ride Number</TableCell> */}
-                <TableCell  align="center">X co-ordinate Location</TableCell>
-                <TableCell align="center">Y co-ordinate Location</TableCell>
+                <TableCell align="center">Starting Location</TableCell>
+                <TableCell align="center">Ending Location</TableCell>
                 {/* <TableCell align="right">Charge Per Daye</TableCell> */}
                 <TableCell align="center">Car Number</TableCell>
                 <TableCell align="center">Status</TableCell>
-            </TableRow>
+              </TableRow>
             </TableHead>
             <TableBody>
-            {rideList?.map((row) => (
+              {rideList?.map((row) => (
                 <TableRow
-                key={row?.car_id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                onClick={() => console.log('tem')}
+                  key={row?.car_id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  onClick={handleClick()}
                 >
-                {/* <TableCell component="th" scope="row">
+                  {/* <TableCell component="th" scope="row">
                     {row?.rideId}
                 </TableCell> */}
-                <TableCell align="center">{row?.car_loc_x}</TableCell> 
-                <TableCell align="center">{row?.car_loc_y}</TableCell> 
-                <TableCell align="center">{row?.car_type}</TableCell>
-                <TableCell align="center" style={{color:' green'}}>{row?.use_state}</TableCell> 
-                
-
+                  <TableCell align="center">{ride.source}</TableCell>
+                  <TableCell align="center">{ride.destination}</TableCell>
+                  <TableCell align="center">{row?.car_type}</TableCell>
+                  <TableCell align="center" style={{ color: " green" }}>
+                    {row?.use_state}
+                  </TableCell>
                 </TableRow>
-            ))}
+              ))}
             </TableBody>
-        </Table>
+          </Table>
         </TableContainer>
-        )}
-        </>
-    );
+      )}
+    </>
+  );
 }

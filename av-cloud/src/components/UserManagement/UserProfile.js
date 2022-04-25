@@ -1,41 +1,59 @@
 import React, { useEffect, useState } from "react";
-import UseForm from "./UseForm";
 import { useHistory } from "react-router-dom";
-import { Navbar, Card, Col, Row, Spinner } from "react-bootstrap";
+import {
+  ListGroup,
+  ListGroupItem,
+  Card,
+  Col,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
+import axios from "axios";
 
 const UserProfile = (props) => {
   const [userDetails, setUserDetails] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
   const [userBookings, setUserBookings] = useState();
   const history = useHistory();
-  const [values, handleChange] = UseForm({
-    email: "",
-    password: "",
-  });
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     console.log("User: ", user);
     if (user !== null && user !== undefined) {
-      setUserDetails(JSON.parse(user));
+      setUserInfo(user);
+      console.log(userInfo);
+      // axios.get(`http://localhost:3000/users/${userInfo.username}`)
+      axios.get("http://localhost:3000/users/user1").then((res) => {
+        if (res.status === 200) {
+          console.log(res.data.data[0]);
+          setUserDetails(res.data.data[0]);
+        } else {
+          history.push("/login");
+          document.location.reload();
+        }
+      });
+
+      axios.get("http://localhost:3000/orders").then((res) => {
+        const user_bookings = [];
+        if (res.status === 200) {
+          for (let i = 0; i < res.data.data.length; i++) {
+            if (res.data.data[i].customer_name == "user4") {
+              user_bookings.push(res.data.data[i]);
+            }
+          }
+
+          setUserBookings(user_bookings);
+        } else {
+          history.push("/login");
+          document.location.reload();
+        }
+      });
     } else {
-      history.push('/login');
+      history.push("/login");
+      document.location.reload();
     }
   }, []);
-
-  // //     fetch(`http://krishnagupta.live:5000/booking/user/${JSON.parse(user).id}`, {
-  // //       method: "GET",
-  // //     })
-  // //       .then((res) => {
-  // //         if (res.status === 200) return res.json();
-  // //       })
-  // //       .then((data) => {
-  // //         setUserBookings(data);
-  // //       })
-  // //       .catch((err) => {
-  // //         console.log(err);
-  // //       });
-  // //   }, []);
 
   return (
     <>
@@ -47,9 +65,7 @@ const UserProfile = (props) => {
             }}
           >
             <h3 style={{ padding: "20px" }}>
-              <em>
-                Welcome Onboard, {userDetails.firstName} {userDetails.lastName}
-              </em>
+              <em>Welcome Onboard, {userDetails.user_name}</em>
             </h3>
           </div>
           {/* <hr style={{ margin: "0px" }} /> */}
@@ -86,11 +102,13 @@ const UserProfile = (props) => {
               <h4>Profile</h4>
               <br />
               <h6>UserName</h6>
-              <p>{userDetails.email}</p>
+              <p>{userDetails.user_name}</p>
+              <h6>User Id</h6>
+              <p>{userDetails.user_id}</p>
               <h6>Email</h6>
-              <p>{userDetails.email}</p>
+              <p>{userDetails.user_email}</p>
               <h6>Phone Number</h6>
-              <p>{userDetails.phoneNumber}</p>
+              <p>{userDetails.user_phone}</p>
             </Col>
             <Col>
               <Col className="user-bookings-card">
@@ -122,7 +140,7 @@ const UserProfile = (props) => {
                                   justifyContent: "space-between",
                                 }}
                               >
-                                <em>{`Booking Id. ${item.pnr}`}</em>
+                                <em>{`Booking Id. ${item.o_booking_id}`}</em>
                                 {isActive && (
                                   <p
                                     style={{
@@ -146,24 +164,24 @@ const UserProfile = (props) => {
                             >
                               <div>
                                 <div>
-                                  <Button
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      history.push(`/booking/?pnr=${item.pnr}`);
-                                    }}
-                                    style={{
-                                      backgroundColor: "white",
-                                      color: "blue",
-                                      padding: "5px",
-                                      margin: "0",
-                                      textDecoration: "underline",
-                                    }}
-                                  >
-                                    <em>More Info</em>
-                                  </Button>
+                                  <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                      Ride start time:{item?.start_time}
+                                    </ListGroup.Item>
+                                   
+                                    <ListGroup.Item>
+                                      Ride finish time:{item?.finish_time}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      Ride distance:{item?.distance}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      Ride total cost:{item?.cost} $
+                                    </ListGroup.Item>
+                                  </ListGroup>
                                 </div>
                               </div>
-                              <div>
+                              {/* <div>
                                 <div
                                   style={{
                                     color: "green",
@@ -182,7 +200,7 @@ const UserProfile = (props) => {
                                       : "",
                                   }}
                                 >{`- ${item.milesUsed} miles`}</div>
-                              </div>
+                              </div> */}
                             </Card.Body>
                           </Card>
                         );

@@ -25,6 +25,8 @@ function NavBar() {
     localStorage.removeItem("user");
     setUserDetails(null);
     history.push("/login");
+    document.location.reload()
+
   };
   // const loginClicked = (e) => {
   //   e.preventDefault();

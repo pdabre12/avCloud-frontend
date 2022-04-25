@@ -47,6 +47,7 @@ export default function RegisterUser() {
 
         // navigate("/login");
         console.log("registration successful");
+        document.location.reload()
       } else {
         console.log(response.message);
         console.log("registration unsuccessful");

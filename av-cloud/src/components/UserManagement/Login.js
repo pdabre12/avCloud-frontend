@@ -13,7 +13,7 @@ export default function LoginForm() {
 
   const [user, setuser] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   useEffect(() => {
@@ -22,7 +22,9 @@ export default function LoginForm() {
 
       if (loggedInUser) {
         setUserDetails(JSON.parse(loggedInUser));
+        console.log(userDetails)
         history.push("/");
+        document.location.reload()
         //   navigate(-1);
       }
     };
@@ -41,8 +43,9 @@ export default function LoginForm() {
     if (response.status == 200) {
       localStorage.setItem("user", JSON.stringify(response.data));
       setUserProfile(response.data);
-      console.log("Login Response", response);
-      history.go(-1);
+      console.log("Login Response", response.data);
+      history.push('/');
+      document.location.reload()
     } else {
       console.log("Unauthorized");
       console.log(response);
@@ -55,14 +58,14 @@ export default function LoginForm() {
   //If not then return this login form
   return (
     <>
-      {userProfile ? (
+      {/* {userProfile ? (
         <Redirect
           to={{
-            pathname: "/userprofile",
+            pathname: "/",
             state: userProfile,
           }}
         />
-      ) : (
+      ) : ( */}
         <React.Fragment>
           <Row>
             <Col>
@@ -90,7 +93,7 @@ export default function LoginForm() {
 
                       <Form.Floating className="mb-3">
                         <Form.Control
-                          type="email"
+                          type="text"
                           id="Email"
                           name="email"
                           placeholder="Email"
@@ -98,7 +101,7 @@ export default function LoginForm() {
                         />
                         <label htmlFor="Email" style={{ marginLeft: 10 }}>
                           {" "}
-                          Email
+                          UserName
                         </label>
                       </Form.Floating>
 
@@ -144,7 +147,7 @@ export default function LoginForm() {
           </Row>
 
         </React.Fragment>
-      )}
+      {/* )} */}
     </>
   );
 }

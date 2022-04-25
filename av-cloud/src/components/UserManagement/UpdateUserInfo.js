@@ -7,8 +7,9 @@ import axios from "axios";
 
 
 export default function UpdateUserInfo(){
-    const [regUserdata, setRegUserdata]=useState({first_name:"",last_name:"", address:"", email:"", password:"",  contact:""});
+    const [regUserdata, setRegUserdata]=useState(null);
     const [userDetails, setUserDetails] = useState();
+    const [userInfo , setUserInfo] = useState(null);
 
     const history = useHistory();
 
@@ -16,9 +17,22 @@ export default function UpdateUserInfo(){
         const user = localStorage.getItem("user");
         console.log("User: ", user);
         if (user !== null && user !== undefined) {
-          setUserDetails(JSON.parse(user));
+          setUserInfo((user));
+
+          axios.get('http://localhost:3000/users/user1')
+        .then((res) => {
+          if (res.status === 200) 
+          { 
+            console.log(res.data.data[0])
+            setUserDetails(res.data.data[0])
+          }
+        else{
+          document.location.reload()       
+         }
+        });
         } else {
-        //   history.push('/login');
+          history.push('/login');
+          document.location.reload()
         }
       }, []);
 
@@ -30,21 +44,23 @@ export default function UpdateUserInfo(){
         event.preventDefault();
         console.log(regUserdata);
 
-        axios.post("/customer/register",{regUserdata}).then(res=>{
+        axios.put("http://localhost:3000/users/user1",regUserdata)
+        .then(res=>{
             if (res.status==200){
-                console.log(res.data)
+                console.log(res.data.message)
+                console.log("Updation successful");
 
-                // navigate("/login");
-                console.log("registration successful");
+                history.push('/')
+                document.location.reload()
             }
             else{
-                console.log("registration unsuccessful");
+                document.location.reload()
+                window.alert("Update information did not go through")
             }
             
         });
      
        
-        setRegUserdata({first_name:"",last_name:"", address:"", email:"", password:"",  contact:""})
         
 
         // history.push("/login");
@@ -58,23 +74,19 @@ return(
           <Card.Body>
           <form onSubmit={handleSubmit} onChange={handleChange}>
               <Form.Group>
-              <Form.Floating className="mb-3">
-                 <Form.Control type="text"  placeholder="Limeka" id="user_name" name="user_name" required />
-                 <label htmlFor="user_name" style={{marginLeft:10}} > User Name</label>
-                 </Form.Floating>
                  
                  <Form.Floating className="mb-3">
-                 <Form.Control type="email"  placeholder="email" id="email" name="email" required/>
+                 <Form.Control type="email"  placeholder="email" id="user_email" name="user_email"  required/>
                  <label htmlFor="Email" style={{marginLeft:10}} > Email</label>
                  </Form.Floating>
 
                  <Form.Floating className="mb-3">
-                 <Form.Control type="password" placeholder="Password" id="Password" name="password" required />
+                 <Form.Control type="password" placeholder="Password" id="user_pw"  name="user_pw" required />
                  <label htmlFor="Password" style={{marginLeft:10}}> Password</label>
                  </Form.Floating>
 
                  <Form.Floating className="mb-3">
-                 <Form.Control type="text"  placeholder="66944554687" id="contact" name="contact" required/>
+                 <Form.Control type="text"  placeholder="66944554687" id="user_phone"  name="user_phone" required/>
                  <label htmlFor="contact" style={{marginLeft:10}} > Contact Number</label>
                  </Form.Floating> 
                  

@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -8,9 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FindSourceAndDestination from './findSourceAndDestination';
 import RideList from './RideList';
 import ReviewRide from './ReviewRide';
@@ -44,7 +40,9 @@ useEffect(() => {
       //   navigate(-1);
     }
     else{
-      history.replace('/login')
+      history.push('/login')
+      document.location.reload()
+
     }
   };
 }, []);
@@ -60,7 +58,10 @@ useEffect(() => {
           setLoading(false);
         }
         else{
+          
           console.log('Error Occured', resp.data.message);
+          history.push("/book")
+          document.location.reload()
         }
       }
 
