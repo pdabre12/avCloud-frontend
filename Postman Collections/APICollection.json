@@ -88,7 +88,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "http://18.222.3.53/users/user2",
+        "url": "http://18.220.171.160/users/user2",
         "description": "delete a user with user_name"
       },
       "response": []
