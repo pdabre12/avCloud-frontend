@@ -80,7 +80,7 @@
       "response": []
     },
     {
-      "name": "http://18.222.3.53/users/{user_name}",
+      "name": "http://18.220.171.160/users/{user_name}",
       "id": "fc31c5fa-d66b-4552-93fc-191a6ca29123",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
