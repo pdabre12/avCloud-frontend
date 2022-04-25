@@ -74,7 +74,7 @@
             }
           }
         },
-        "url": "http://18.222.3.53/users/login",
+        "url": "http://18.220.171.160/users/login",
         "description": "check user login credential"
       },
       "response": []
