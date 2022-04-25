@@ -8,7 +8,6 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import Button from "@restart/ui/esm/Button";
 import axios from "axios";
 
 const UserProfile = (props) => {
@@ -24,7 +23,7 @@ const UserProfile = (props) => {
       setUserInfo(user);
       console.log(userInfo);
       // axios.get(`http://localhost:3000/users/${userInfo.username}`)
-      axios.get("http://localhost:3000/users/user1").then((res) => {
+      axios.get("http://localhost:3000/users/pdabre12").then((res) => {
         if (res.status === 200) {
           console.log(res.data.data[0]);
           setUserDetails(res.data.data[0]);
@@ -34,14 +33,15 @@ const UserProfile = (props) => {
         }
       });
 
-      axios.get("http://localhost:3000/orders").then((res) => {
+      axios.get("http://localhost:3000/bookings").then((res) => {
         const user_bookings = [];
         if (res.status === 200) {
           for (let i = 0; i < res.data.data.length; i++) {
-            if (res.data.data[i].customer_name == "user4") {
+            if (res.data.data[i].customer_name == "pdabre12") {
               user_bookings.push(res.data.data[i]);
             }
           }
+          console.log(res.data.data)
 
           setUserBookings(user_bookings);
         } else {
@@ -140,17 +140,17 @@ const UserProfile = (props) => {
                                   justifyContent: "space-between",
                                 }}
                               >
-                                <em>{`Booking Id. ${item.o_booking_id}`}</em>
+                                <em>{`Booking Id. ${item.booking_id}`}</em>
                                 {isActive && (
                                   <p
                                     style={{
                                       margin: 0,
-                                      color: "red",
+                                      color: "green",
                                       fontSize: "0.7rem",
                                       fontWeight: "bold",
                                     }}
                                   >
-                                    CANCELLED
+                                    COMPLETED
                                   </p>
                                 )}
                               </div>
@@ -166,18 +166,19 @@ const UserProfile = (props) => {
                                 <div>
                                   <ListGroup variant="flush">
                                     <ListGroup.Item>
-                                      Ride start time:{item?.start_time}
+                                      Ride booking time:{item?.reserve_time}
                                     </ListGroup.Item>
                                    
                                     <ListGroup.Item>
-                                      Ride finish time:{item?.finish_time}
+                                      Ride start location:{item?.start_loc}
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                      Ride distance:{item?.distance}
+                                      Ride destination location:{item?.destination_loc}
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                      Ride total cost:{item?.cost} $
+                                      Ride Car ID:{item?.b_car_id}
                                     </ListGroup.Item>
+                                    
                                   </ListGroup>
                                 </div>
                               </div>

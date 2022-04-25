@@ -41,7 +41,7 @@ export default function LoginForm() {
     axios.post("http://localhost:3000/users/login",user)
     .then(response=>{
     if (response.status == 200) {
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("user", (response.data));
       setUserProfile(response.data);
       console.log("Login Response", response.data);
       history.push('/');

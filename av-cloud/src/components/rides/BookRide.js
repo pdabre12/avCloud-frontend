@@ -36,7 +36,7 @@ useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
 
     if (loggedInUser) {
-      setUserDetails(JSON.parse(loggedInUser));
+      setUserDetails((loggedInUser));
       //   navigate(-1);
     }
     else{
@@ -51,7 +51,15 @@ useEffect(() => {
   const handleNext = async () => {
     setActiveStep(activeStep + 1);
     if(activeStep == 2){
-      axios.post(`http://localhost:3000/bookings/${userDetails.user_name}`)
+
+      const car_details ={
+        
+          "start_loc": "San Jose",
+          "destination_loc": "Los Angeles",
+          "car_id": 2
+      
+      }
+      axios.post(`http://localhost:3000/bookings/pdabre12`,car_details)
       .then(resp =>{
         if(resp.status === 200){
           setRide(resp.data.data);

@@ -19,7 +19,7 @@ export default function UpdateUserInfo(){
         if (user !== null && user !== undefined) {
           setUserInfo((user));
 
-          axios.get('http://localhost:3000/users/user1')
+          axios.get('http://localhost:3000/users/pdabre12')
         .then((res) => {
           if (res.status === 200) 
           { 
@@ -44,7 +44,7 @@ export default function UpdateUserInfo(){
         event.preventDefault();
         console.log(regUserdata);
 
-        axios.put("http://localhost:3000/users/user1",regUserdata)
+        axios.put("http://localhost:3000/users/pdabre12",regUserdata)
         .then(res=>{
             if (res.status==200){
                 console.log(res.data.message)

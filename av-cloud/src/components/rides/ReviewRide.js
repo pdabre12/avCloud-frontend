@@ -22,6 +22,15 @@ const ReviewRide = (props) => {
               </TableRow>
             </TableHead> */}
         <TableBody>
+        <TableRow
+            key={ride.car_id}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          >
+            <TableCell component="th" scope="ride">
+              Car ID
+            </TableCell>
+            <TableCell align="right">02</TableCell>
+          </TableRow>
           <TableRow
             key={ride.source}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -48,8 +57,10 @@ const ReviewRide = (props) => {
             <TableCell component="th" scope="ride">
               Model
             </TableCell>
-            <TableCell align="right">{ride.car_type}</TableCell>
+            <TableCell align="right">audi.a2</TableCell>
           </TableRow>
+
+          
         </TableBody>
       </Table>
     </TableContainer>

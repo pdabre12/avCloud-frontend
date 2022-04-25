@@ -15,7 +15,7 @@ function NavBar() {
         user != undefined &&
         JSON.stringify(userDetails) != user
       ) {
-        setUserDetails(JSON.parse(user));
+        setUserDetails((user));
       }
     }, 500);
   }, []);

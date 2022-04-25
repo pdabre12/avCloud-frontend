@@ -22,8 +22,9 @@ export default function RegisterUser() {
       const loggedInUser = localStorage.getItem("user");
 
       if (loggedInUser) {
-        setUserDetails(JSON.parse(loggedInUser));
+        setUserDetails((loggedInUser));
         history.push("/");
+        document.location.reload()
         //   navigate(-1);
       }
     };

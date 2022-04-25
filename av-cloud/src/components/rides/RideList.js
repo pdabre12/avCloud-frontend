@@ -30,22 +30,13 @@ export default function RideList(props) {
   // const {persona } = location.state;
   const [rideList, setRideList] = useState();
   const [loading, setLoading] = useState(true);
-
+ 
   const { ride } = props;
 
   useEffect(() => {
     fetchRideList();
   }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    const { ride, setRide } = props;
-
-    setRide({
-      ...ride,
-      car_type: e.target.value,
-    });
-  };
 
   const fetchRideList = async () => {
     axios.get("http://localhost:3000/cars").then((res) => {
@@ -80,6 +71,7 @@ export default function RideList(props) {
             <TableHead>
               <TableRow>
                 {/* <TableCell>Ride Number</TableCell> */}
+                <TableCell align="center">Car ID</TableCell>
                 <TableCell align="center">Starting Location</TableCell>
                 <TableCell align="center">Ending Location</TableCell>
                 {/* <TableCell align="right">Charge Per Daye</TableCell> */}
@@ -92,11 +84,12 @@ export default function RideList(props) {
                 <TableRow
                   key={row?.car_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  onClick={handleClick()}
                 >
                   {/* <TableCell component="th" scope="row">
                     {row?.rideId}
                 </TableCell> */}
+                <TableCell align="center">{row?.car_id}</TableCell>
+
                   <TableCell align="center">{ride.source}</TableCell>
                   <TableCell align="center">{ride.destination}</TableCell>
                   <TableCell align="center">{row?.car_type}</TableCell>
