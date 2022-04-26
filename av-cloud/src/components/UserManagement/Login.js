@@ -12,15 +12,15 @@ export default function LoginForm() {
   const [userProfile, setUserProfile] = useState(null);
 
   const [user, setuser] = useState({
-    email: "",
-    password: ""
+    user_name: "",
+    user_pw: ""
   });
 
   useEffect(() => {
     return () => {
       const loggedInUser = localStorage.getItem("user");
 
-      if (loggedInUser) {
+      if (loggedInUser!=null && user!=undefined) {
         setUserDetails(JSON.parse(loggedInUser));
         console.log(userDetails)
         history.push("/");
@@ -41,7 +41,9 @@ export default function LoginForm() {
     axios.post("http://localhost:3000/users/login",user)
     .then(response=>{
     if (response.status == 200) {
-      localStorage.setItem("user", (response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
+      const loggedInUser = localStorage.getItem("user");
+      console.log(loggedInUser)
       setUserProfile(response.data);
       console.log("Login Response", response.data);
       history.push('/');
@@ -94,9 +96,9 @@ export default function LoginForm() {
                       <Form.Floating className="mb-3">
                         <Form.Control
                           type="text"
-                          id="Email"
-                          name="email"
-                          placeholder="Email"
+                          id="user_name"
+                          name="user_name"
+                          placeholder="UserName"
                           required
                         />
                         <label htmlFor="Email" style={{ marginLeft: 10 }}>
@@ -108,8 +110,8 @@ export default function LoginForm() {
                       <Form.Floating className="mb-3">
                         <Form.Control
                           type="password"
-                          id="Password"
-                          name="password"
+                          id="user_pw"
+                          name="user_pw"
                           placeholder="Password"
                           required
                         />

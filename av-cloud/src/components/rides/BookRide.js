@@ -36,7 +36,7 @@ useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
 
     if (loggedInUser) {
-      setUserDetails((loggedInUser));
+      setUserDetails(JSON.parse(loggedInUser));
       //   navigate(-1);
     }
     else{
@@ -51,6 +51,7 @@ useEffect(() => {
   const handleNext = async () => {
     setActiveStep(activeStep + 1);
     if(activeStep == 2){
+      console.log(ride)
 
       const car_details ={
         
@@ -59,7 +60,7 @@ useEffect(() => {
           "car_id": 2
       
       }
-      axios.post(`http://localhost:3000/bookings/pdabre12`,car_details)
+      axios.post(`http://localhost:3000/bookings/${userDetails.username}`,car_details)
       .then(resp =>{
         if(resp.status === 200){
           setRide(resp.data.data);

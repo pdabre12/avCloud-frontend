@@ -69,7 +69,7 @@ export default function RideList(props) {
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple-table">
             <TableHead>
-              <TableRow>
+              <TableRow hover>
                 {/* <TableCell>Ride Number</TableCell> */}
                 <TableCell align="center">Car ID</TableCell>
                 <TableCell align="center">Starting Location</TableCell>
@@ -81,7 +81,7 @@ export default function RideList(props) {
             </TableHead>
             <TableBody>
               {rideList?.map((row) => (
-                <TableRow
+                <TableRow hover
                   key={row?.car_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
@@ -90,7 +90,7 @@ export default function RideList(props) {
                 </TableCell> */}
                 <TableCell align="center">{row?.car_id}</TableCell>
 
-                  <TableCell align="center">{ride.source}</TableCell>
+                  <TableCell align="center"  >{ride.source}</TableCell>
                   <TableCell align="center">{ride.destination}</TableCell>
                   <TableCell align="center">{row?.car_type}</TableCell>
                   <TableCell align="center" style={{ color: " green" }}>

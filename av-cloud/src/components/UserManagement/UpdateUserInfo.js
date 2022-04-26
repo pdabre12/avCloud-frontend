@@ -14,27 +14,30 @@ export default function UpdateUserInfo(){
     const history = useHistory();
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
-        console.log("User: ", user);
-        if (user !== null && user !== undefined) {
-          setUserInfo((user));
-
-          axios.get('http://localhost:3000/users/pdabre12')
-        .then((res) => {
-          if (res.status === 200) 
-          { 
-            console.log(res.data.data[0])
-            setUserDetails(res.data.data[0])
-          }
-        else{
-          document.location.reload()       
-         }
-        });
-        } else {
-          history.push('/login');
-          document.location.reload()
-        }
-      }, []);
+      const user = localStorage.getItem("user");
+      console.log("User: ", user);
+      if (user !== null && user !== undefined) {
+        setUserInfo(JSON.parse(user));
+      }
+      else{
+        history.push('/login')
+        document.location.reload()
+      }
+     
+        axios.get(`http://localhost:3000/users/${JSON.parse(user).username}`)
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data);
+                setUserDetails(res.data.data);
+              } else {
+                history.push("/login");
+                document.location.reload();
+              }
+            });
+  
+          
+        
+        }, []);
 
     const handleChange=(event)=>{
         // console.log(event.target.value);
@@ -44,7 +47,7 @@ export default function UpdateUserInfo(){
         event.preventDefault();
         console.log(regUserdata);
 
-        axios.put("http://localhost:3000/users/pdabre12",regUserdata)
+        axios.put(`http://localhost:3000/users/${userInfo.username}`,regUserdata)
         .then(res=>{
             if (res.status==200){
                 console.log(res.data.message)

@@ -12,7 +12,7 @@ import axios from "axios";
 
 const UserProfile = (props) => {
   const [userDetails, setUserDetails] = useState(null);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
   const [userBookings, setUserBookings] = useState();
   const history = useHistory();
 
@@ -20,40 +20,43 @@ const UserProfile = (props) => {
     const user = localStorage.getItem("user");
     console.log("User: ", user);
     if (user !== null && user !== undefined) {
-      setUserInfo(user);
-      console.log(userInfo);
-      // axios.get(`http://localhost:3000/users/${userInfo.username}`)
-      axios.get("http://localhost:3000/users/pdabre12").then((res) => {
-        if (res.status === 200) {
-          console.log(res.data.data[0]);
-          setUserDetails(res.data.data[0]);
-        } else {
-          history.push("/login");
-          document.location.reload();
-        }
-      });
-
-      axios.get("http://localhost:3000/bookings").then((res) => {
-        const user_bookings = [];
-        if (res.status === 200) {
-          for (let i = 0; i < res.data.data.length; i++) {
-            if (res.data.data[i].customer_name == "pdabre12") {
-              user_bookings.push(res.data.data[i]);
-            }
-          }
-          console.log(res.data.data)
-
-          setUserBookings(user_bookings);
-        } else {
-          history.push("/login");
-          document.location.reload();
-        }
-      });
-    } else {
-      history.push("/login");
-      document.location.reload();
+      setUserInfo(JSON.parse(user));
     }
-  }, []);
+    else{
+      history.push('/login')
+      document.location.reload()
+    }
+   
+      axios.get(`http://localhost:3000/users/${JSON.parse(user).username}`)
+          .then((res) => {
+            if (res.status === 200) {
+              console.log(res.data);
+              setUserDetails(res.data.data);
+            } else {
+              history.push("/login");
+              document.location.reload();
+            }
+          });
+
+        axios.get("http://localhost:3000/bookings").then((res) => {
+          const user_bookings = [];
+          if (res.status === 200) {
+            for (let i = 0; i < res.data.data.length; i++) {
+              if (res.data.data[i].customer_name == `${JSON.parse(user).username}`) {
+                user_bookings.push(res.data.data[i]);
+              }
+            }
+            console.log(res.data.data);
+
+            setUserBookings(user_bookings);
+            console.log(userBookings);
+          } else {
+            history.push("/login");
+            document.location.reload();
+          }
+        });
+      
+      }, []);
 
   return (
     <>
@@ -65,7 +68,7 @@ const UserProfile = (props) => {
             }}
           >
             <h3 style={{ padding: "20px" }}>
-              <em>Welcome Onboard, {userDetails.user_name}</em>
+              <em>Welcome Onboard, {userDetails[0]?.user_name}</em>
             </h3>
           </div>
           {/* <hr style={{ margin: "0px" }} /> */}
@@ -102,13 +105,13 @@ const UserProfile = (props) => {
               <h4>Profile</h4>
               <br />
               <h6>UserName</h6>
-              <p>{userDetails.user_name}</p>
+              <p>{userDetails[0]?.user_name}</p>
               <h6>User Id</h6>
-              <p>{userDetails.user_id}</p>
+              <p>{userDetails[0]?.user_id}</p>
               <h6>Email</h6>
-              <p>{userDetails.user_email}</p>
+              <p>{userDetails[0]?.user_email}</p>
               <h6>Phone Number</h6>
-              <p>{userDetails.user_phone}</p>
+              <p>{userDetails[0]?.user_phone}</p>
             </Col>
             <Col>
               <Col className="user-bookings-card">
@@ -168,17 +171,17 @@ const UserProfile = (props) => {
                                     <ListGroup.Item>
                                       Ride booking time:{item?.reserve_time}
                                     </ListGroup.Item>
-                                   
+
                                     <ListGroup.Item>
                                       Ride start location:{item?.start_loc}
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                      Ride destination location:{item?.destination_loc}
+                                      Ride destination location:
+                                      {item?.destination_loc}
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                       Ride Car ID:{item?.b_car_id}
                                     </ListGroup.Item>
-                                    
                                   </ListGroup>
                                 </div>
                               </div>
