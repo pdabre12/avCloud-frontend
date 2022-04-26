@@ -94,7 +94,7 @@
       "response": []
     },
     {
-      "name": "http://18.220.171.160/users/{user_name}",
+      "name": "http://18.222.97.169/users/{user_name}",
       "id": "be1b8b21-f413-4e21-a6af-f70d1397ef1e",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
