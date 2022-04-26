@@ -82,4 +82,47 @@ foreign key (o_booking_id) references bookings(booking_id) on update cascade
 );
 
 truncate table bookings;
-describe cars;
+describe orders;
+
+-- ref: https://dba.stackexchange.com/questions/43899/too-many-database-connections-on-amazon-rds 
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `avCloud_db`.`Kill_Long_Running_Selects` $$
+CREATE PROCEDURE `avCloud_db`.`Kill_Long_Running_Selects` (time_limit INT,display INT)
+BEGIN
+
+    DECLARE ndx,lastndx INT;
+
+    DROP TABLE IF EXISTS avCloud_db.LongRunningSelects;
+    CREATE TABLE avCloud_db.LongRunningSelects
+    (
+        id INT NOT NULL AUTO_INCREMENT,
+        idtokill BIGINT,
+        PRIMARY KEY (id)
+    ) ENGINE=MEMORY;
+    INSERT INTO avCloud_db.LongRunningSelects (idtokill)
+    SELECT id FROM information_schema.processlist
+    WHERE user<>'system user' AND info regexp '^SELECT' AND time > time_limit;
+
+    SELECT COUNT(1) INTO lastndx FROM avCloud_db.LongRunningSelects;
+    SET ndx = 0;
+    WHILE ndx < lastndx DO
+        SET ndx = ndx + 1;
+        SELECT idtokill INTO @kill_id
+        FROM avCloud_db.LongRunningSelects WHERE id = ndx;
+        CALL mysql.rds_kill(@kill_id);
+    END WHILE;
+
+    IF lastndx > 0 THEN
+        IF display = 1 THEN
+            SELECT GROUP_CONCAT(idtokill) INTO @idlist FROM avCloud_db.LongRunningSelects;
+            SELECT @idlist IDs_KIlled;
+            SELECT CONCAT('Processes Killed : ',lastndx) Kill_Long_Running_Selects;
+        END IF;
+    END IF;
+
+END $$
+
+CALL avCloud_db.Kill_Long_Running_Selects(0,0);
+SHOW FULL PROCESSLIST;
+SET session wait_timeout=300;

@@ -33,7 +33,13 @@ router.post('/users', async function(req, res, next) {
 router.post('/users/login', async function(req, res, next) {
   console.log("**** POST **** User Login ****");
   try {
-    res.json(await queries.loginUser(req.body));
+    let response = await queries.loginUser(req.body);
+    // console.log(response.username);
+    if (response.username === 'not_valid') {
+      res.statusMessage = "Password does not match";
+      res.status(401);
+    }
+    res.json(response);
   } catch (err) {
     console.error(`Error while logging in. `, err.message);
     next(err);

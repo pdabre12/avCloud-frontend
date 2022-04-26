@@ -47,6 +47,7 @@ async function loginUser(user){
   var jsonObj = Object.assign({}, result[0]);
   // console.log(jsonObj);
   if (Object.keys(jsonObj).length === 0) {
+    // throw new Error('User does not exist');
     message = 'User does not exist';
   } else {
     var pw_sha = helper.decrypt(jsonObj.user_pw);
@@ -57,7 +58,8 @@ async function loginUser(user){
       username = user.user_name;
     }
     else 
-      message = 'Error in logging in. ';
+      // throw new Error('Password does not match');
+      message = 'Password does not match';
   }
 
   return {username, message};
