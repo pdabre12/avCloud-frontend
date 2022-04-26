@@ -17,6 +17,7 @@ async function getMultiple(table_name){
 // *********** USERS ***********
 
 async function postUser(user){
+  var username = 'not_valid';
   var pw_sha = helper.encrypt(user.user_pw);
   // console.log(pw_sha);
 
@@ -30,9 +31,10 @@ async function postUser(user){
 
   if (result.affectedRows) {
     message = 'New user created successfully!';
+    username = user.user_name;
   }
 
-  return {message};
+  return {username, message};
 }
 
 

@@ -64,7 +64,13 @@ router.get('/users/:user_name', async function(req, res, next) {
   var user = req.params.user_name;
   console.log("**** GET **** One User Info ****");
   try {
-    res.json(await queries.getOneUser(user));
+    let response = await queries.getOneUser(user);
+    // console.log(response.data.length);
+    if (response.data.length === 0) {
+      res.statusMessage = "User does not exist";
+      res.status(400);
+    }
+    res.json(response);
   } catch (err) {
     console.error(`Error getting information about this user. `, err.message);
     next(err);
