@@ -88,13 +88,13 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "http://18.220.171.160/users/user2",
+        "url": "http://18.222.97.169/users/user2",
         "description": "delete a user with user_name"
       },
       "response": []
     },
     {
-      "name": "http://18.220.171.160/users/{user_name}",
+      "name": "http://18.222.97.169/users/{user_name}",
       "id": "be1b8b21-f413-4e21-a6af-f70d1397ef1e",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
@@ -111,13 +111,13 @@
             }
           }
         },
-        "url": "http://18.220.171.160/users/user1",
+        "url": "http://18.222.97.169/users/user1",
         "description": "use username to query info about one specific user"
       },
       "response": []
     },
     {
-      "name": "http://18.220.171.160/users/{user_name}",
+      "name": "http://18.222.97.169/users/{user_name}",
       "id": "32b430e1-cfe1-4b89-ba91-f368de28b1e3",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
@@ -134,7 +134,7 @@
             }
           }
         },
-        "url": "http://18.220.171.160/users/user1"
+        "url": "http://18.222.97.169/users/user1"
       },
       "response": []
     }
