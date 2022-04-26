@@ -15,7 +15,7 @@ function NavBar() {
         user != undefined &&
         JSON.stringify(userDetails) != user
       ) {
-        setUserDetails(JSON.parse(user));
+        setUserDetails((user));
       }
     }, 500);
   }, []);
@@ -25,6 +25,8 @@ function NavBar() {
     localStorage.removeItem("user");
     setUserDetails(null);
     history.push("/login");
+    document.location.reload()
+
   };
   // const loginClicked = (e) => {
   //   e.preventDefault();

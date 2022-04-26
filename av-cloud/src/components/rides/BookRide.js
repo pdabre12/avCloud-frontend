@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -8,9 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FindSourceAndDestination from './findSourceAndDestination';
 import RideList from './RideList';
 import ReviewRide from './ReviewRide';
@@ -40,11 +36,13 @@ useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
 
     if (loggedInUser) {
-      setUserDetails(JSON.parse(loggedInUser));
+      setUserDetails((loggedInUser));
       //   navigate(-1);
     }
     else{
-      history.replace('/login')
+      history.push('/login')
+      document.location.reload()
+
     }
   };
 }, []);
@@ -53,14 +51,25 @@ useEffect(() => {
   const handleNext = async () => {
     setActiveStep(activeStep + 1);
     if(activeStep == 2){
-      axios.post(`http://localhost:3000/bookings/${userDetails.user_name}`)
+
+      const car_details ={
+        
+          "start_loc": "San Jose",
+          "destination_loc": "Los Angeles",
+          "car_id": 2
+      
+      }
+      axios.post(`http://localhost:3000/bookings/pdabre12`,car_details)
       .then(resp =>{
         if(resp.status === 200){
           setRide(resp.data.data);
           setLoading(false);
         }
         else{
+          
           console.log('Error Occured', resp.data.message);
+          history.push("/book")
+          document.location.reload()
         }
       }
 
