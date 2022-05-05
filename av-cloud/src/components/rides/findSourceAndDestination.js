@@ -14,7 +14,7 @@ export default function FindSourceAndDestination(props) {
     setRide(
       {
         ...ride,
-        source: e.target.value,
+        start_loc: e.target.value,
       }
     );
   }
@@ -23,7 +23,7 @@ export default function FindSourceAndDestination(props) {
     setRide(
       {
         ...ride,
-        destination: e.target.value,
+        destination_loc: e.target.value,
       }
     );
   }

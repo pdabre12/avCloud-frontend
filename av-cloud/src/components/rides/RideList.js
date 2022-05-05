@@ -30,6 +30,7 @@ export default function RideList(props) {
   // const {persona } = location.state;
   const [rideList, setRideList] = useState();
   const [loading, setLoading] = useState(true);
+  const [sty,setSty] = useState('hover');
  
   const { ride } = props;
 
@@ -44,7 +45,6 @@ export default function RideList(props) {
         const rows = [];
         console.log(res.data.data);
         res.data.data.map((el) => {
-          console.log(el);
           const { car_id, car_type, car_loc_x, car_loc_y, use_state } = el;
           rows.push({
             car_id,
@@ -63,11 +63,25 @@ export default function RideList(props) {
     });
   };
 
+  const setCarType = (e) => {
+    const { ride, setRide} = props;
+    setSty('select-ride')
+    console.log(ride)
+    const car_id_string = e.target.innerHTML
+    setRide(
+      {
+        ...ride,
+        car_id: parseInt(car_id_string),
+      }
+    );
+  }
+
+
   return (
     <>
       {!loading && (
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple-table">
+          <Table sx={{ minWidth: 650 }} aria-label="simple-table" >
             <TableHead>
               <TableRow hover>
                 {/* <TableCell>Ride Number</TableCell> */}
@@ -81,17 +95,18 @@ export default function RideList(props) {
             </TableHead>
             <TableBody>
               {rideList?.map((row) => (
-                <TableRow hover
+                <TableRow className={sty} hover
                   key={row?.car_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                onClick = {(e)=>{setCarType(e)}}
                 >
                   {/* <TableCell component="th" scope="row">
                     {row?.rideId}
                 </TableCell> */}
-                <TableCell align="center">{row?.car_id}</TableCell>
+                <TableCell align="center" >{row?.car_id}</TableCell>
 
-                  <TableCell align="center"  >{ride.source}</TableCell>
-                  <TableCell align="center">{ride.destination}</TableCell>
+                  <TableCell align="center"  >{ride.start_loc}</TableCell>
+                  <TableCell align="center">{ride.destination_loc}</TableCell>
                   <TableCell align="center">{row?.car_type}</TableCell>
                   <TableCell align="center" style={{ color: " green" }}>
                     {row?.use_state}

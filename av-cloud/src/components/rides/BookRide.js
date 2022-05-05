@@ -51,19 +51,20 @@ useEffect(() => {
   const handleNext = async () => {
     setActiveStep(activeStep + 1);
     if(activeStep == 2){
-      console.log(ride)
+      console.log(JSON.stringify(ride))
+      // const ride2 = JSON.stringify(ride)
+      const ride2 = {
+        "start_loc": "San Jose",
+        "destination_loc": "Sacramento",
+        "car_id": 4
+    }
 
-      const car_details ={
-        
-          "start_loc": "San Jose",
-          "destination_loc": "Los Angeles",
-          "car_id": 2
-      
-      }
-      axios.post(`http://localhost:3000/bookings/${userDetails.username}`,car_details)
+     
+      axios.post(`http://localhost:3000/bookings/${userDetails.username}`,ride2)
       .then(resp =>{
         if(resp.status === 200){
           setRide(resp.data.data);
+          console.log('Booking completed')
           setLoading(false);
         }
         else{

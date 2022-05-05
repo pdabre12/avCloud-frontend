@@ -29,7 +29,7 @@ const ReviewRide = (props) => {
             <TableCell component="th" scope="ride">
               Car ID
             </TableCell>
-            <TableCell align="right">02</TableCell>
+            <TableCell align="right">{ride.car_id}</TableCell>
           </TableRow>
           <TableRow
             key={ride.source}
@@ -38,7 +38,7 @@ const ReviewRide = (props) => {
             <TableCell component="th" scope="ride">
               Source
             </TableCell>
-            <TableCell align="right">{ride.source}</TableCell>
+            <TableCell align="right">{ride.start_loc}</TableCell>
           </TableRow>
           <TableRow
             key={ride.destination}
@@ -47,7 +47,7 @@ const ReviewRide = (props) => {
             <TableCell component="th" scope="ride">
               Destination
             </TableCell>
-            <TableCell align="right">{ride.destination}</TableCell>
+            <TableCell align="right">{ride.destination_loc}</TableCell>
           </TableRow>
 
           <TableRow
