@@ -7,6 +7,10 @@ import UpdateUserInfo from './components/UserManagement/UpdateUserInfo';
 import UserProfile from './components/UserManagement/UserProfile';
 import NavBar from './components/NavigationBar';
 import BookRide from './components/rides/BookRide';
+import AdminLogin from './components/admin/AdminLogin';
+import AdminDashboard from './components/admin/AdminDashboard';
+import AdminUsersList from './components/admin/AdminUsersList';
+import AdminCarsList from './components/admin/AdminCarsList';
 
 function App() {
   return (
@@ -29,7 +33,21 @@ function App() {
           <Route exact path="/book">
             <BookRide />
           </Route>
-         
+          <Route exact path="/admin/login">
+            <AdminLogin />
+          </Route>
+          <Route exact path="/admin/dashboard">
+            <AdminDashboard />
+          </Route>
+
+          <Route exact path="/admin/dashboard/users">
+            <AdminUsersList />
+          </Route>
+
+          <Route exact path="/admin/dashboard/cars">
+            <AdminCarsList />
+          </Route>
+
           </Switch>
     </div>
     </Router>
