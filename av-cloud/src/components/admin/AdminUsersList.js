@@ -11,6 +11,7 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
+import AdminNavBar from "./AdminNavigationBar";
 
 const AdminUsersList = () => {
   const history = useHistory();
@@ -78,8 +79,9 @@ const AdminUsersList = () => {
   return (
     <div>
       <>
+      <AdminNavBar/>
         {users?.map((user) => (
-          <Card style={{ marginTop: "2%"  }}>
+          <Card style={{ margin: "2%"  }}>
             <Card.Header>{user.user_name}<Button value={user.user_name} onClick={handleDelete} style={{float:'right'}}>Delete</Button></Card.Header>
             <Card.Body>
               <Card.Title> User ID : {user.user_id} </Card.Title>

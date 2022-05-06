@@ -11,6 +11,7 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
+import AdminNavBar from "./AdminNavigationBar";
 
 const AdminCarsList = () => {
   const history = useHistory();
@@ -79,11 +80,12 @@ const AdminCarsList = () => {
   return (
     <div>
       <>
+      <AdminNavBar/>
         {cars?.map((car) => (
-          <Card style={{ marginTop: "2%"  }}>
+          <Card style={{ margin: "2%"  }}>
             <Card.Header>Car ID: {car.car_id}<Button value={car.car_id} onClick={handleDelete} style={{float:'right'}}>Delete</Button></Card.Header>
             <Card.Body>
-              <Card.Title> Car Type : {car.car_type} </Card.Title>
+              <Card.Title> Car Name : {car.car_type} </Card.Title>
               <Card.Text>
                 <ListGroup variant="flush">
                   <ListGroup.Item><b>Car state : </b>{car.use_state}</ListGroup.Item>

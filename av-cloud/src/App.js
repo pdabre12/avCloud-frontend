@@ -11,12 +11,11 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AdminUsersList from './components/admin/AdminUsersList';
 import AdminCarsList from './components/admin/AdminCarsList';
+import AdminNavBar from './components/admin/AdminNavigationBar';
 
 function App() {
   return (
-    <Router>
-    <NavBar />
-    
+    <Router>    
     <div className="App">
       <Switch>
       <Route exact path="/">

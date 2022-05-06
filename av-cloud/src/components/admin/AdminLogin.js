@@ -4,7 +4,7 @@ import { Card, Form, Row, Col, Button } from "react-bootstrap";
 // import logout from "./logout";
 
 import axios from "axios";
-
+import AdminNavBar from "./AdminNavigationBar";
 export default function AdminLogin() {
   const history = useHistory();
   const [userDetails, setUserDetails] = useState(null);
@@ -67,6 +67,7 @@ export default function AdminLogin() {
           }}
         />
       ) : ( */}
+      <AdminNavBar/>
         <React.Fragment>
           <Row>
             <Col>
