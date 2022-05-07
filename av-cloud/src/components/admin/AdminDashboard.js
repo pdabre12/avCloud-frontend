@@ -70,7 +70,7 @@ const AdminDashboard = () => {
           </Card>
         </a>
 
-        <a href="/admin/dashboard/users">
+        <a href="/admin/dashboard/charts">
           <Card style={{ marginRight: "2%" }}>
             <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
