@@ -63,17 +63,17 @@ export default function RideList(props) {
     });
   };
 
-  const setCarType = (e) => {
+  const setCarType = (event) => {
     const { ride, setRide} = props;
-    setSty('select-ride')
-    console.log(ride)
-    const car_id_string = e.target.innerHTML
+    const car_id_string = event.target.innerHTML
     setRide(
       {
         ...ride,
         car_id: parseInt(car_id_string),
       }
     );
+    console.log(ride)
+
   }
 
 
@@ -96,14 +96,14 @@ export default function RideList(props) {
             <TableBody>
               {rideList?.map((row) => (
                 <TableRow className={sty} hover
-                  key={row?.car_id}
+                  key={row?.car_id} value={row?.car_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick = {(e)=>{setCarType(e)}}
+                onClick = {setCarType} selected
                 >
                   {/* <TableCell component="th" scope="row">
                     {row?.rideId}
                 </TableCell> */}
-                <TableCell align="center" >{row?.car_id}</TableCell>
+                <TableCell align="center" value={row?.car_id} onClick={setCarType}>{row?.car_id}</TableCell>
 
                   <TableCell align="center"  >{ride.start_loc}</TableCell>
                   <TableCell align="center">{ride.destination_loc}</TableCell>

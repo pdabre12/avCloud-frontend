@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 
 import {
@@ -16,7 +16,7 @@ import axios from "axios";
 import AdminNavBar from "./AdminNavigationBar";
 
 const AdminDashboardChart = () => {
-  const [bookings, setBookings] = useState(null);
+  const [bookings, setBookings] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const [chartData, setChartData] = useState(null);
   const history = useHistory();
@@ -36,8 +36,6 @@ const AdminDashboardChart = () => {
         console.log(res.data.data);
         setBookings(res.data.data)
 
-
-        setTimeout(() => {
             if (bookings!==null && bookings!== undefined) {
                 console.log(bookings);
               setChartData({
@@ -56,9 +54,9 @@ const AdminDashboardChart = () => {
                   },
                 ],
               });
+            //   console.log(chartData)
             }
             
-        }, 500);
 
        
       } else {
@@ -81,7 +79,9 @@ const AdminDashboardChart = () => {
         {chartData ? (
           <Bar
             data={chartData}
+            // width={"300%"}
             options={{
+            // maintainAspectRatio: false ,
               plugins: {
                 title: {
                   display: true,
