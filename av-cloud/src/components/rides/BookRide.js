@@ -12,6 +12,7 @@ import RideList from "./RideList";
 import ReviewRide from "./ReviewRide";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import NavBar from "../NavigationBar";
 
 const steps = [
   "Enter source and destination",
@@ -22,6 +23,8 @@ const steps = [
 export default function BookRide() {
   const [activeStep, setActiveStep] = useState(0);
   const [ride, setRide] = useState();
+
+  const [booking,setBooking] = useState(null);
   const [loading, setLoading] = useState();
   const history = useHistory();
 
@@ -48,24 +51,14 @@ export default function BookRide() {
     setActiveStep(activeStep + 1);
     if (activeStep == 2) {
       console.log(JSON.stringify(ride));
-      // const ride2 = JSON.stringify(ride)
-      const ride2 = {
-        start_loc: "San Jose",
-        destination_loc: "Sacramento",
-        car_id: 4,
-      };
-      const ride3 ={
-        car_type:"tesla",
-        car_id:4,
-        booking_id:999
-      }
+    
+      
 
-      console.log(ride3)
       axios
-        .post(`http://localhost:3000/bookings/${userDetails.username}`, ride2)
+        .post(`http://localhost:3000/bookings/${userDetails.username}`, ride)
         .then((resp) => {
           if (resp.status === 200) {
-            setRide(resp.data.data);
+            setBooking(resp.data);
             console.log("Booking completed");
             setLoading(false);
           } else {
@@ -75,22 +68,39 @@ export default function BookRide() {
           }
         });
 
-      axios
-        .post(
-          'https://steven-li-pi6erje6e73fs9gx.socketxp.com/',
-          JSON.stringify(ride3)
-        )
-        .then((resp) => {
-          if (resp.status === 201) {
-            setRide(resp.data.code);
-            console.log("Carla Simulator completed");
-            setLoading(false);
-          } else {
-            console.log("Error Occured", resp.data.message);
-            history.push("/book");
-            document.location.reload();
+        console.log(booking)
+        
+        
+        setTimeout (()=>{
+          console.log(booking)
+          const trip = {
+            car_id: ride.car_id,
+            car_type:'audi.a2',
+            booking_id : booking.booking_id
           }
-        });
+          console.log(trip)
+  
+  
+        axios
+          .post(
+            'https://steven-li-pi6erje6e73fs9gx.socketxp.com/',
+            trip
+          )
+          .then((resp) => {
+            if (resp.status === 201) {
+              setRide(resp.data.code);
+              console.log("Carla Simulator completed");
+              setLoading(false);
+            } else {
+              console.log("Error Occured", resp.data.message);
+              history.push("/book");
+              document.location.reload();
+            }
+          });
+
+        },500)
+        console.log('x')
+        
     }
   };
 
@@ -111,7 +121,8 @@ export default function BookRide() {
     }
   }
 
-  return (
+  return (<>
+    <NavBar/>
     <Container component="main" maxWidth="m" sx={{ mb: 4 }}>
       <Paper
         variant="outlined"
@@ -168,5 +179,6 @@ export default function BookRide() {
         </React.Fragment>
       </Paper>
     </Container>
+    </>
   );
 }

@@ -19,17 +19,7 @@ const AdminDashboard = () => {
     const [userInfo,setUserInfo] = useState(null);
 
 
-    const adminFeaturesList =[
-      {
-        link : "/admin/dashboard/users"
-      },
-      {
-        link : "/admin/dashboard/users"
-      },
-      {
-        link : "/admin/dashboard/users"
-      }
-    ]
+   
 
     useEffect(() => {
         const user = localStorage.getItem("admin");

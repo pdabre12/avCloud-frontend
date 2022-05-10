@@ -4,6 +4,7 @@ import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { Link, Redirect, useHistory } from "react-router-dom";
 
 import axios from "axios";
+import NavBar from "../NavigationBar";
 
 export default function RegisterUser() {
   const history = useHistory();
@@ -70,6 +71,7 @@ export default function RegisterUser() {
       />
     ) : ( */}
       <React.Fragment>
+        <NavBar/>
         <Card
           style={{ width: "35rem", marginLeft: "25rem", marginTop: "2rem" }}
         >

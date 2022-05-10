@@ -72,7 +72,7 @@ const AdminDashboardChart = () => {
         document.location.reload();
       }
     });
-  }, []);
+  }, [bookings]);
 
 
    function twoSum(bookings){

@@ -5,6 +5,7 @@ import { Card, Form, Row, Col, Button } from "react-bootstrap";
 
 import axios from "axios";
 import { login } from "../../features/autheticationfeature";
+import NavBar from "../NavigationBar";
 
 export default function LoginForm() {
   const history = useHistory();
@@ -69,6 +70,7 @@ export default function LoginForm() {
         />
       ) : ( */}
         <React.Fragment>
+          <NavBar/>
           <Row>
             <Col>
               <Card

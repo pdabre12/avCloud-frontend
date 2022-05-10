@@ -82,7 +82,7 @@ const AdminUsersList = () => {
       <AdminNavBar/>
         {users?.map((user) => (
           <Card style={{ margin: "2%"  }}>
-            <Card.Header>{user.user_name}<Button value={user.user_name} onClick={handleDelete} style={{float:'right'}}>Delete</Button></Card.Header>
+            <Card.Header><b>{user.user_name}</b><Button value={user.user_name} onClick={handleDelete} style={{float:'right'}}>Delete</Button></Card.Header>
             <Card.Body>
               <Card.Title> User ID : {user.user_id} </Card.Title>
               <Card.Text>

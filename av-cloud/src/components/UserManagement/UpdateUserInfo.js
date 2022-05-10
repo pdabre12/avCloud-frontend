@@ -3,6 +3,7 @@ import { Button, Card, Form, Row , Col} from "react-bootstrap";
 
 import { Link ,useHistory} from "react-router-dom";
 import axios from "axios";
+import NavBar from "../NavigationBar";
 
 
 
@@ -71,6 +72,7 @@ export default function UpdateUserInfo(){
 
 return(
   <React.Fragment>
+    <NavBar/>
 
       <Card style={{ width: '35rem', marginLeft:'25rem', marginTop:'2rem' }}>
           <Card.Header  style={{textAlign:'center', color:'green', fontStyle:"italic"}}>Update your profile</Card.Header>

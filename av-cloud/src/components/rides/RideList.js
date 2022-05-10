@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 
 function createData(rideNumber, carNumber, date, charge, status) {
   return { rideNumber, carNumber, charge, date, status };
@@ -30,7 +31,6 @@ export default function RideList(props) {
   // const {persona } = location.state;
   const [rideList, setRideList] = useState();
   const [loading, setLoading] = useState(true);
-  const [sty,setSty] = useState('hover');
  
   const { ride } = props;
 
@@ -40,7 +40,7 @@ export default function RideList(props) {
 
 
   const fetchRideList = async () => {
-    axios.get("http://localhost:3000/cars").then((res) => {
+    axios.get("http://localhost:3000/car/available").then((res) => {
       if (res.status === 200) {
         const rows = [];
         console.log(res.data.data);
@@ -65,7 +65,7 @@ export default function RideList(props) {
 
   const setCarType = (event) => {
     const { ride, setRide} = props;
-    const car_id_string = event.target.innerHTML
+    const car_id_string = event.target.value
     setRide(
       {
         ...ride,
@@ -95,7 +95,7 @@ export default function RideList(props) {
             </TableHead>
             <TableBody>
               {rideList?.map((row) => (
-                <TableRow className={sty} hover
+                <TableRow  hover
                   key={row?.car_id} value={row?.car_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 onClick = {setCarType} selected
@@ -103,7 +103,7 @@ export default function RideList(props) {
                   {/* <TableCell component="th" scope="row">
                     {row?.rideId}
                 </TableCell> */}
-                <TableCell align="center" value={row?.car_id} onClick={setCarType}>{row?.car_id}</TableCell>
+                <TableCell align="center" value={row?.car_id} >{row?.car_id}</TableCell>
 
                   <TableCell align="center"  >{ride.start_loc}</TableCell>
                   <TableCell align="center">{ride.destination_loc}</TableCell>
@@ -111,9 +111,12 @@ export default function RideList(props) {
                   <TableCell align="center" style={{ color: " green" }}>
                     {row?.use_state}
                   </TableCell>
+                  <Button style={{marginTop:'7%'}} value={row?.car_id} onClick={setCarType}>Select</Button>
                 </TableRow>
+                
               ))}
             </TableBody>
+          
           </Table>
         </TableContainer>
       )}
