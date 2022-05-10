@@ -21,6 +21,7 @@ const AdminDashboardChart = () => {
   const [chartData, setChartData] = useState(null);
   const history = useHistory();
 
+
   useEffect(() => {
     const user = localStorage.getItem("admin");
     console.log("User: ", user);
@@ -36,14 +37,22 @@ const AdminDashboardChart = () => {
         console.log(res.data.data);
         setBookings(res.data.data)
 
-            if (bookings!==null && bookings!== undefined) {
+            if (bookings!==null && bookings!== undefined && bookings.length!=0) {
+              
                 console.log(bookings);
+               const cleaned_bookings =  twoSum(bookings);
+               console.log(cleaned_bookings);
+               const final_cars = Object.keys(cleaned_bookings)
+               const final_bookings = Object.values(cleaned_bookings)
+
+               console.log(final_bookings,final_cars)
               setChartData({
-                labels: bookings?.map((booking) => booking.booking_id),
+                labels: Object.keys(cleaned_bookings),
+
                 datasets: [
                   {
-                    label: "Price in USD",
-                    data: bookings?.map((booking) => booking.b_car_id),
+                    label: "Number of cars per booking",
+                    data: Object.values(cleaned_bookings),
                     backgroundColor: [
                       "#ffbb11",
                       "#ecf0f1",
@@ -57,7 +66,6 @@ const AdminDashboardChart = () => {
             //   console.log(chartData)
             }
             
-
        
       } else {
         console.log("Error happened!");
@@ -65,6 +73,31 @@ const AdminDashboardChart = () => {
       }
     });
   }, []);
+
+
+   function twoSum(bookings){
+    
+    const cars ={
+      
+      }
+      
+    
+    for ( let index=0;index<bookings.length;index++){
+      if (bookings[index].b_car_id in cars){
+        cars[bookings[index].b_car_id] +=1
+      
+
+    }
+    else{
+    cars[bookings[index].b_car_id] = 1
+    }
+  }
+  return cars;
+  
+};
+
+
+
 
   return (
     <div>
@@ -79,13 +112,12 @@ const AdminDashboardChart = () => {
         {chartData ? (
           <Bar
             data={chartData}
-            // width={"300%"}
             options={{
-            // maintainAspectRatio: false ,
+                indexAxis:'y',
               plugins: {
                 title: {
                   display: true,
-                  text: "Cryptocurrency prices",
+                  text: "Cars per booking",
                 },
                 legend: {
                   display: true,

@@ -9,6 +9,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import axios from "axios";
+import NavBar from "../NavigationBar";
 
 const UserProfile = (props) => {
   const [userDetails, setUserDetails] = useState(null);
@@ -60,6 +61,7 @@ const UserProfile = (props) => {
 
   return (
     <>
+    <NavBar/>
       {userDetails ? (
         <>
           <div
