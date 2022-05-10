@@ -55,7 +55,7 @@ export default function BookRide() {
       
 
       axios
-        .post(`http://localhost:3000/bookings/${userDetails.username}`, ride)
+        .post(`https://avcloud-node.herokuapp.com/bookings/${userDetails.username}`, ride)
         .then((resp) => {
           if (resp.status === 200) {
             setBooking(resp.data);

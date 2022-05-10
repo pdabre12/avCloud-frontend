@@ -59,7 +59,7 @@ function AdminNavBar() {
               Add Rides
             </Nav.Link>
             <Nav.Link
-              href="/admin/sensor-data"
+              href="https://use-349807.wn.r.appspot.com/"
               style={{ color: "white", marginRight: "2rem" }}
             >
               View Sensor Data{" "}
