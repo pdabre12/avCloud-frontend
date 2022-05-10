@@ -34,7 +34,7 @@ export default function BookRide() {
   //   const {user} = authContext;
 
   useEffect(() => {
-    return () => {
+    
       const loggedInUser = localStorage.getItem("user");
 
       if (loggedInUser!=null && loggedInUser!=undefined) {
@@ -44,7 +44,7 @@ export default function BookRide() {
         history.push("/login");
         document.location.reload();
       }
-    };
+   
   }, []);
 
   const handleNext = async () => {
