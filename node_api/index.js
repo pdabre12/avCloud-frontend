@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+//const port = 3000;
 const queriesRouter = require("./routes/queries");
 app.use(express.json());
 app.use(
@@ -31,6 +31,7 @@ app.use((err, req, res, next) => {
   return;
 });
 
-app.listen(port, () => {
-  console.log(`API listening at http://localhost:${port}`);
-});
+app.listen(process.env.PORT || 3000)
+// app.listen(port, () => {
+//   console.log(`API listening at http://localhost:${port}`);
+// });
