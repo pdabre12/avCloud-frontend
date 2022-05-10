@@ -32,7 +32,7 @@ const AdminDashboardChart = () => {
       document.location.reload();
     }
 
-    axios.get("http://localhost:3000/bookings").then((res) => {
+    axios.get("https://avcloud-node.herokuapp.com/bookings").then((res) => {
       if (res.status === 200) {
         console.log(res.data.data);
         setBookings(res.data.data)
