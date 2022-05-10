@@ -28,7 +28,7 @@ const UserProfile = (props) => {
       document.location.reload()
     }
    
-      axios.get(`http://localhost:3000/users/${JSON.parse(user).username}`)
+      axios.get(`https://avcloud-node.herokuapp.com/users/${JSON.parse(user).username}`)
           .then((res) => {
             if (res.status === 200) {
               console.log(res.data);
@@ -39,7 +39,7 @@ const UserProfile = (props) => {
             }
           });
 
-        axios.get("http://localhost:3000/bookings").then((res) => {
+        axios.get("https://avcloud-node.herokuapp.com/bookings").then((res) => {
           const user_bookings = [];
           if (res.status === 200) {
             for (let i = 0; i < res.data.data.length; i++) {

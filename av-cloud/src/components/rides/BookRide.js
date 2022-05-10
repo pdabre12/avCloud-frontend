@@ -37,7 +37,7 @@ export default function BookRide() {
     return () => {
       const loggedInUser = localStorage.getItem("user");
 
-      if (loggedInUser) {
+      if (loggedInUser!=null && loggedInUser!=undefined) {
         setUserDetails(JSON.parse(loggedInUser));
         //   navigate(-1);
       } else {

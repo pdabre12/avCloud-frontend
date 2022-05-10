@@ -40,7 +40,7 @@ const AdminUsersList = () => {
     //         }
     //       });
 
-    axios.get("http://localhost:3000/users").then((res) => {
+    axios.get("https://avcloud-node.herokuapp.com/users").then((res) => {
       if (res.status === 200) {
         console.log(res.data.data);
 
@@ -58,7 +58,7 @@ const AdminUsersList = () => {
     console.log(event.target.value);
         const deleteUser = event.target.value
         
-        axios.delete(`http://localhost:3000/users/${deleteUser}`)
+        axios.delete(`https://avcloud-node.herokuapp.com/${deleteUser}`)
         .then((res) =>{
             if (res.status === 200){
                 console.log(res.data);

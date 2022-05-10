@@ -59,20 +59,20 @@ const AdminCarsList = () => {
         const deleteCar = event.target.value;
         console.log(deleteCar)
         
-        // axios.delete(`http://localhost:3000/cars/${deleteCar}`)
-        // .then((res) =>{
-        //     if (res.status === 200){
-        //         console.log(res.data);
-        //         window.alert('Delete car complete')
-        //         document.location.reload()
-        //     }
-        //     else{
-        //         window.alert('Cannot delete car! Please try again!')
-        //         document.location.reload()
-        //     }
+        axios.delete(`https://avcloud-node.herokuapp.com/cars/${deleteCar}`)
+        .then((res) =>{
+            if (res.status === 200){
+                console.log(res.data);
+                window.alert('Delete car complete')
+                document.location.reload()
+            }
+            else{
+                window.alert('Cannot delete car! Please try again!')
+                document.location.reload()
+            }
 
 
-        // });
+        });
   }
 
 

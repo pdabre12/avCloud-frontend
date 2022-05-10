@@ -40,7 +40,7 @@ export default function RegisterUser() {
     event.preventDefault();
     console.log(regUserdata);
 
-    axios.post("http://localhost:3000/users", regUserdata).then((response) => {
+    axios.post("https://avcloud-node.herokuapp.com/users", regUserdata).then((response) => {
       if (response.status == 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
         setUserProfile(response.data);

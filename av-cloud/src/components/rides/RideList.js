@@ -40,7 +40,7 @@ export default function RideList(props) {
 
 
   const fetchRideList = async () => {
-    axios.get("http://localhost:3000/car/available").then((res) => {
+    axios.get("https://avcloud-node.herokuapp.com/car/available").then((res) => {
       if (res.status === 200) {
         const rows = [];
         console.log(res.data.data);
