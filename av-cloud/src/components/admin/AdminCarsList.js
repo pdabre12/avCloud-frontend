@@ -40,7 +40,7 @@ const AdminCarsList = () => {
     //         }
     //       });
 
-    axios.get("http://localhost:3000/cars").then((res) => {
+    axios.get("https://avcloud-node.herokuapp.com/cars").then((res) => {
       if (res.status === 200) {
         console.log(res.data.data);
 
