@@ -75,8 +75,7 @@ export default function BookRide() {
 
         const booking_user = localStorage.getItem("booking");
 
-     
-        
+    
         
         setTimeout (()=>{
           if(booking_user!=null && booking_user!=undefined && booking_user.length>0){
@@ -92,7 +91,7 @@ export default function BookRide() {
   
         axios
           .post(
-            'https://steven-li-pi6erje6e73fs9gx.socketxp.com/',
+            'https://steven-li-h6vnra1fx3zwj5i5.socketxp.com/',
             trip
           )
           .then((resp) => {
