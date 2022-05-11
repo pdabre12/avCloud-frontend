@@ -83,7 +83,7 @@ export default function BookRide() {
           console.log(JSON.parse(booking_user).booking_id)
           const trip = {
             car_id: ride.car_id,
-            car_type:'audi.a2',
+            car_type:'tesla',
             booking_id : JSON.parse(booking_user).booking_id
           }
           console.log(trip)
