@@ -13,6 +13,7 @@ import ReviewRide from "./ReviewRide";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../NavigationBar";
+import AdminBookingsList from "../admin/AdminBookingsList";
 
 const steps = [
   "Enter source and destination",
@@ -58,7 +59,11 @@ export default function BookRide() {
         .post(`https://avcloud-node.herokuapp.com/bookings/${userDetails.username}`, ride)
         .then((resp) => {
           if (resp.status === 200) {
-            setBooking(resp.data);
+            console.log(resp.data)
+            localStorage.setItem("booking", JSON.stringify(resp.data));
+          
+        setBooking(resp.data);
+
             console.log("Booking completed");
             setLoading(false);
           } else {
@@ -68,15 +73,19 @@ export default function BookRide() {
           }
         });
 
-        console.log(booking)
+        const booking_user = localStorage.getItem("booking");
+
+     
         
         
         setTimeout (()=>{
-          console.log(booking)
+          if(booking_user!=null && booking_user!=undefined && booking_user.length>0){
+          console.log(JSON.parse(booking_user).message)
+          console.log(JSON.parse(booking_user).booking_id)
           const trip = {
             car_id: ride.car_id,
             car_type:'audi.a2',
-            booking_id : booking.booking_id
+            booking_id : JSON.parse(booking_user).booking_id
           }
           console.log(trip)
   
@@ -98,7 +107,8 @@ export default function BookRide() {
             }
           });
 
-        },500)
+    }
+  },100)
         console.log('x')
         
     }
